@@ -44,6 +44,7 @@ namespace CodeAnalyzerDLLClient
         static FunctionTracker FT;
         static ClassRelationshipFinder CRF;
         static AnalysisDisplayer AD;
+        static List<string> list;
 #if(test_codeanalyzerconsoleapp)
         static void Main(string[] args)
         {
