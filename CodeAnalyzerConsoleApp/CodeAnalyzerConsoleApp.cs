@@ -77,6 +77,7 @@ namespace CodeAnalyzerDLLClient
                     FT.DetectFunctionsAndScopes();
                     //FT.CountLines();
                     CRF = new ClassRelationshipFinder(FE, FT);
+                    
                     AD = new AnalysisDisplayer(file, FT, CRF);
                     //AD.DisplayAnalysisToStandardOutput();
 
