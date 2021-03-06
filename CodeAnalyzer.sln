@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalyzer", "CodeAnalyzer\CodeAnalyzer.csproj", "{17723223-E428-4BEB-9F52-82B199E0F830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalyzerDLLClient", "CodeAnalyzerConsoleApp\CodeAnalyzerDLLClient.csproj", "{97E2DD2B-2F44-435D-A536-8B3FDE2B8114}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17723223-E428-4BEB-9F52-82B199E0F830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17723223-E428-4BEB-9F52-82B199E0F830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17723223-E428-4BEB-9F52-82B199E0F830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17723223-E428-4BEB-9F52-82B199E0F830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97E2DD2B-2F44-435D-A536-8B3FDE2B8114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97E2DD2B-2F44-435D-A536-8B3FDE2B8114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97E2DD2B-2F44-435D-A536-8B3FDE2B8114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97E2DD2B-2F44-435D-A536-8B3FDE2B8114}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4A3B927-A4DB-45C6-A517-209203876F4B}
+	EndGlobalSection
+EndGlobal

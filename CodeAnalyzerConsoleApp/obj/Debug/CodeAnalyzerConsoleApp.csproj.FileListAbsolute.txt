@@ -1,0 +1,10 @@
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzerConsoleApp.exe.config
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzerConsoleApp.exe
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzerConsoleApp.pdb
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzer.dll
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzer.pdb
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\obj\Debug\CodeAnalyzerConsoleApp.csprojAssemblyReference.cache
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\obj\Debug\CodeAnalyzerConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\obj\Debug\CodeAnalyzerConsoleApp.csproj.CopyComplete
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\obj\Debug\CodeAnalyzerConsoleApp.exe
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzerConsoleApp\obj\Debug\CodeAnalyzerConsoleApp.pdb

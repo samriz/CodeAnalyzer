@@ -1,0 +1,6 @@
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzer\bin\Debug\CodeAnalyzer.dll
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzer\bin\Debug\CodeAnalyzer.pdb
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzer\obj\Debug\CodeAnalyzer.csproj.CoreCompileInputs.cache
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzer\obj\Debug\CodeAnalyzer.dll
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzer\obj\Debug\CodeAnalyzer.pdb
+C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer\CodeAnalyzer\obj\Debug\CodeAnalyzer.csprojAssemblyReference.cache
