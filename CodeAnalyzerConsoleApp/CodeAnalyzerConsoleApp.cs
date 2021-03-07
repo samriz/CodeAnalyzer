@@ -40,6 +40,7 @@ namespace CodeAnalyzerDLLClient
 {
     class CodeAnalyzerConsoleApp
     {
+        static DirectorySearcher DS;
         static FileExtractor FE;
         static FunctionTracker FT;
         static ClassNameFinder CNF;
@@ -67,48 +68,44 @@ namespace CodeAnalyzerDLLClient
             {
                 string path = GetPathFromCommandLine(args);
                 //path = path + Environment.NewLine;
-                DirectorySearcher DS = new DirectorySearcher(path);
+                DS = new DirectorySearcher(path);
 
                 SetFilesBasedOnCommandLineArguments(args, DS);
 
                 //DS.AddFileNamesToList(DS.GetFilesWithFullPath());
                 Console.WriteLine("Path: {0}\n", path);
                 //DisplayListOfFoundFiles(DS);
-                foreach (string file in DS.GetFilesWithFullPath())
-                {
-                    FE = new FileExtractor(file);
-                    FT = new FunctionTracker(FE);
-                    FT.DetectFunctionsAndScopes();
-                    //FT.CountLines();
-                    CNF = new ClassNameFinder(FE, FT);
-                    
-                    foreach(var className in CNF.GetAllClassNames())
-                    {
-                        classNames = classNames.Append(className);
-                    }
-                    AD = new AnalysisDisplayer(file, FT, CNF);
-                    //AD.DisplayAnalysisToStandardOutput();
-
-
-                    //DisplayBasedOnCommandLineArguments(args, AD, FE);
-
-
-                    /*foreach (string line in FE.GetExtractedLines())
-                    {
-                        Console.WriteLine(line);
-                    }*/
-                }
+                SearchAndAnalyze(args);
                 classNames = classNames.Distinct();
                 classNames = classNames.ToList();
-                foreach (var classname in classNames)
-                {
-                    Console.WriteLine(classname);
-                }
-                //TRF = new TypeRelationshipFinder();
+                TRF = new TypeRelationshipFinder();
             }
             Console.ReadKey();
         }
 #endif
+        private static void SearchAndAnalyze(string[] args)
+        {
+            foreach (string file in DS.GetFilesWithFullPath())
+            {
+                FE = new FileExtractor(file);
+                FT = new FunctionTracker(FE);
+                FT.DetectFunctionsAndScopes();
+                //FT.CountLines();
+                CNF = new ClassNameFinder(FE, FT);
+
+                foreach (var className in CNF.GetAllClassNames())
+                {
+                    classNames = classNames.Append(className);
+                }
+                AD = new AnalysisDisplayer(file, FT, CNF);
+                //AD.DisplayAnalysisToStandardOutput();
+                DisplayBasedOnCommandLineArguments(args, AD, FE);
+                /*foreach (string line in FE.GetExtractedLines())
+                {
+                    Console.WriteLine(line);
+                }*/
+            }
+        }
         private static string GetPathFromCommandLine(string[] args)
         {
             string path = Path.GetFullPath(args[0]);
