@@ -23,6 +23,16 @@ namespace CodeAnalyzer
         }
         public void FindRelationships()
         {
+            foreach(var line in FE.GetExtractedLines())
+            {
+                foreach(var className in classNames)
+                {
+                    if (line.Contains(className))
+                    {
+                        Console.WriteLine("This file and/or class uses {0}.", className);
+                    }
+                }
+            }
         }
     }
 }

@@ -73,7 +73,12 @@ namespace CodeAnalyzerDLLClient
                 classNames = classNames.Distinct();
                 classNames = classNames.ToList();
                 
-                foreach (string file in DS.GetFilesWithFullPath())
+                foreach(var className in classNames)
+                {
+                    Console.WriteLine(className);
+                }
+
+                /*foreach (string file in DS.GetFilesWithFullPath())
                 {
                     FE = new FileExtractor(file);
                     FT = new FunctionTracker(FE);
@@ -81,7 +86,7 @@ namespace CodeAnalyzerDLLClient
                     TRF = new TypeRelationshipFinder(classNames, FE);
                     AD = new AnalysisDisplayer(file, FT, TRF);
                     DisplayBasedOnCommandLineArguments(args, AD, FE);
-                }
+                }*/
             }
             Console.ReadKey();
         }
@@ -92,7 +97,7 @@ namespace CodeAnalyzerDLLClient
             {
                 FE = new FileExtractor(file);
                 FT = new FunctionTracker(FE);
-                //FT.DetectFunctionsAndScopes();
+                FT.DetectFunctionsAndScopes();
                 CNF = new ClassNameFinder(FE, FT);
 
                 foreach (var className in CNF.GetAllClassNames())
