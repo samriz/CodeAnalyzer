@@ -9,6 +9,7 @@ namespace CodeAnalyzer
     public class TypeRelationshipFinder
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<string> classNames;
         FileExtractor FE;
         //List<string> fileLines;
@@ -25,6 +26,8 @@ namespace CodeAnalyzer
         public void FindRelationships()
         {
         }
+=======
+>>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
 =======
 >>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
     }

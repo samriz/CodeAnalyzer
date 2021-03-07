@@ -66,14 +66,18 @@ namespace CodeAnalyzerDLLClient
             {
                 string path = GetPathFromCommandLine(args);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 DS = new DirectorySearcher(path);
 =======
+=======
+>>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
                 //path = path + Environment.NewLine;
                 DirectorySearcher DS = new DirectorySearcher(path);
 
 >>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
                 SetFilesBasedOnCommandLineArguments(args, DS);
                 Console.WriteLine("Path: {0}\n", path);
+<<<<<<< HEAD
 <<<<<<< HEAD
                 SearchAndAnalyze(args);
                 classNames = classNames.Distinct();
@@ -139,6 +143,40 @@ namespace CodeAnalyzerDLLClient
                 //AD = new AnalysisDisplayer(file, FT, CNF);
                 //DisplayBasedOnCommandLineArguments(args, AD, FE);
 =======
+                //TRF = new TypeRelationshipFinder();
+>>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
+=======
+                //DisplayListOfFoundFiles(DS);
+                foreach (string file in DS.GetFilesWithFullPath())
+                {
+                    FE = new FileExtractor(file);
+                    FT = new FunctionTracker(FE);
+                    FT.DetectFunctionsAndScopes();
+                    //FT.CountLines();
+                    CNF = new ClassNameFinder(FE, FT);
+                    
+                    foreach(var className in CNF.GetAllClassNames())
+                    {
+                        classNames = classNames.Append(className);
+                    }
+                    AD = new AnalysisDisplayer(file, FT, CNF);
+                    //AD.DisplayAnalysisToStandardOutput();
+
+
+                    //DisplayBasedOnCommandLineArguments(args, AD, FE);
+
+
+                    /*foreach (string line in FE.GetExtractedLines())
+                    {
+                        Console.WriteLine(line);
+                    }*/
+                }
+                classNames = classNames.Distinct();
+                classNames = classNames.ToList();
+                foreach (var classname in classNames)
+                {
+                    Console.WriteLine(classname);
+                }
                 //TRF = new TypeRelationshipFinder();
 >>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
             }
