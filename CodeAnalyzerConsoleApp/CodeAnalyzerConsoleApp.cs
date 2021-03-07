@@ -40,6 +40,7 @@ namespace CodeAnalyzerDLLClient
 {
     class CodeAnalyzerConsoleApp
     {
+        static DirectorySearcher DS;
         static FileExtractor FE;
         static FunctionTracker FT;
         static ClassNameFinder CNF;
@@ -65,16 +66,9 @@ namespace CodeAnalyzerDLLClient
             else
             {
                 string path = GetPathFromCommandLine(args);
-<<<<<<< HEAD
                 DS = new DirectorySearcher(path);
-=======
-                //path = path + Environment.NewLine;
-                DirectorySearcher DS = new DirectorySearcher(path);
-
->>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
                 SetFilesBasedOnCommandLineArguments(args, DS);
                 Console.WriteLine("Path: {0}\n", path);
-<<<<<<< HEAD
                 SearchAndAnalyze(args);
                 classNames = classNames.Distinct();
                 classNames = classNames.ToList();
@@ -102,49 +96,13 @@ namespace CodeAnalyzerDLLClient
                 CNF = new ClassNameFinder(FE, FT);
 
                 foreach (var className in CNF.GetAllClassNames())
-=======
-                //DisplayListOfFoundFiles(DS);
-                foreach (string file in DS.GetFilesWithFullPath())
                 {
-                    FE = new FileExtractor(file);
-                    FT = new FunctionTracker(FE);
-                    FT.DetectFunctionsAndScopes();
-                    //FT.CountLines();
-                    CNF = new ClassNameFinder(FE, FT);
-                    
-                    foreach(var className in CNF.GetAllClassNames())
-                    {
-                        classNames = classNames.Append(className);
-                    }
-                    AD = new AnalysisDisplayer(file, FT, CNF);
-                    //AD.DisplayAnalysisToStandardOutput();
-
-
-                    //DisplayBasedOnCommandLineArguments(args, AD, FE);
-
-
-                    /*foreach (string line in FE.GetExtractedLines())
-                    {
-                        Console.WriteLine(line);
-                    }*/
+                    classNames = classNames.Append(className);
                 }
-                classNames = classNames.Distinct();
-                classNames = classNames.ToList();
-                foreach (var classname in classNames)
->>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
-                {
-                    Console.WriteLine(classname);
-                }
-<<<<<<< HEAD
                 //AD = new AnalysisDisplayer(file, FT, CNF);
                 //DisplayBasedOnCommandLineArguments(args, AD, FE);
-=======
-                //TRF = new TypeRelationshipFinder();
->>>>>>> parent of e467eb1 (Made DS in CodeAnalyzerConsoleApp.cs static. Refactored code in Main() by placing it in a separate function.)
             }
-            Console.ReadKey();
         }
-#endif
         private static string GetPathFromCommandLine(string[] args)
         {
             string path = Path.GetFullPath(args[0]);
