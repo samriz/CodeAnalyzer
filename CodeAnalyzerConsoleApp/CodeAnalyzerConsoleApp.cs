@@ -40,6 +40,13 @@ namespace CodeAnalyzerDLLClient
 {
     class CodeAnalyzerConsoleApp
     {
+        /*DirectorySearcher DS;
+        FileExtractor FE;
+        FunctionTracker FT;
+        ClassNameFinder CNF;
+        AnalysisDisplayer AD;
+        TypeRelationshipFinder TRF;
+        IEnumerable<string> classNames;*/
         static DirectorySearcher DS;
         static FileExtractor FE;
         static FunctionTracker FT;
@@ -77,16 +84,6 @@ namespace CodeAnalyzerDLLClient
                 {
                     Console.WriteLine(className);
                 }
-
-                /*foreach (string file in DS.GetFilesWithFullPath())
-                {
-                    FE = new FileExtractor(file);
-                    FT = new FunctionTracker(FE);
-                    FT.DetectFunctionsAndScopes();
-                    TRF = new TypeRelationshipFinder(classNames, FE);
-                    AD = new AnalysisDisplayer(file, FT, TRF);
-                    DisplayBasedOnCommandLineArguments(args, AD, FE);
-                }*/
             }
             Console.ReadKey();
         }
@@ -104,8 +101,8 @@ namespace CodeAnalyzerDLLClient
                 {
                     classNames = classNames.Append(className);
                 }
-                //AD = new AnalysisDisplayer(file, FT, CNF);
-                //DisplayBasedOnCommandLineArguments(args, AD, FE);
+                AD = new AnalysisDisplayer(file, FT);
+                DisplayBasedOnCommandLineArguments(args, AD, FE);
             }
         }
         private static string GetPathFromCommandLine(string[] args)
@@ -147,9 +144,9 @@ namespace CodeAnalyzerDLLClient
                     return false;
                 }
                 //if the first argument is a valid path then make sure the other command-line arguments are the allowed ones: /S, /X, /R
-                for (int i = 1; i < args.Length; i++)
+                //for (int i = 1; i < args.Length; i++)
                 {
-                    if (!args[i].Equals("/S") && !args[i].Equals("/X") && !args[i].Equals("/R"))
+                    if (!args.Contains("/S") && !args.Contains("/X") && !args.Contains("/R"))
                     {
                         Console.WriteLine("Invalid command(s) detected.");
                         return false;
@@ -160,7 +157,7 @@ namespace CodeAnalyzerDLLClient
                     }
                 }
             }
-            return false;
+            //return false;
         }
         private static void SetFilesBasedOnCommandLineArguments(string[] args, DirectorySearcher DS)
         {

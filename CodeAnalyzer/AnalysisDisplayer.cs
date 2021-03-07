@@ -46,6 +46,12 @@ namespace CodeAnalyzer
         {
             //XML_Name = Directory.GetCurrentDirectory() + @"\Analysis.xml";
         }
+        public AnalysisDisplayer(string file, FunctionTracker FT)
+        {
+            this.XML_Name = file + "_analysis.xml";
+            this.FT = FT;
+            this.TRF = TRF;
+        }
         public AnalysisDisplayer(string file, FunctionTracker FT, TypeRelationshipFinder TRF)
         {
             this.XML_Name = file + "_analysis.xml";
@@ -71,6 +77,7 @@ namespace CodeAnalyzer
                 Console.WriteLine("Function complexity: {0}", node.GetNumberOfScopes());
                 Console.WriteLine("Number of lines: {0}\n", node.GetNumberOfLines());
             }
+            //TRF.FindRelationships();
         }
         public void DisplayAnalysisToXML()
         { 
