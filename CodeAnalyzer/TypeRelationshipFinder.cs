@@ -10,17 +10,19 @@ namespace CodeAnalyzer
     {
         List<string> classNames;
         FileExtractor FE;
-        public TypeRelationshipFinder()
+        //List<string> fileLines;
+        public TypeRelationshipFinder(List<string> classNames, FileExtractor FE)
         {
-
+            this.classNames = classNames;
+            this.FE = FE;
         }
-
+        public TypeRelationshipFinder(IEnumerable<string> classNames, FileExtractor FE)
+        {
+            this.classNames = classNames.ToList();
+            this.FE = FE;
+        }
         public void FindRelationships()
         {
-            foreach(var line in FE.GetExtractedLines())
-            {
-
-            }
         }
     }
 }

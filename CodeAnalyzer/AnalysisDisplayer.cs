@@ -38,18 +38,19 @@ namespace CodeAnalyzer
         //private static readonly string XML_Name;
         private string XML_Name;
         private FunctionTracker FT;
-        private ClassNameFinder CRF;
+        //private ClassNameFinder CNF;
+        private TypeRelationshipFinder TRF;
         //private List<FunctionNode> functionScopes;
 
         static AnalysisDisplayer()
         {
             //XML_Name = Directory.GetCurrentDirectory() + @"\Analysis.xml";
         }
-        public AnalysisDisplayer(string file, FunctionTracker FT, ClassNameFinder CRF)
+        public AnalysisDisplayer(string file, FunctionTracker FT, TypeRelationshipFinder TRF)
         {
             this.XML_Name = file + "_analysis.xml";
             this.FT = FT;
-            this.CRF = CRF;
+            this.TRF = TRF;
         }
         /*public AnalysisDisplayer(string file, List<FunctionNode> functionScopes) 
         {

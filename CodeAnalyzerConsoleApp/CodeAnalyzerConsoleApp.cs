@@ -56,7 +56,6 @@ namespace CodeAnalyzerDLLClient
 #if(test_codeanalyzerconsoleapp)
         static void Main(string[] args)
         {
-            //string path = @"C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer";
             //verify that at least a directory path is entered
             if (!VerifyCommandLineArguments(args))
             {
@@ -67,18 +66,22 @@ namespace CodeAnalyzerDLLClient
             else
             {
                 string path = GetPathFromCommandLine(args);
-                //path = path + Environment.NewLine;
                 DS = new DirectorySearcher(path);
-
                 SetFilesBasedOnCommandLineArguments(args, DS);
-
-                //DS.AddFileNamesToList(DS.GetFilesWithFullPath());
                 Console.WriteLine("Path: {0}\n", path);
-                //DisplayListOfFoundFiles(DS);
                 SearchAndAnalyze(args);
                 classNames = classNames.Distinct();
                 classNames = classNames.ToList();
-                TRF = new TypeRelationshipFinder();
+                
+                foreach (string file in DS.GetFilesWithFullPath())
+                {
+                    FE = new FileExtractor(file);
+                    FT = new FunctionTracker(FE);
+                    FT.DetectFunctionsAndScopes();
+                    TRF = new TypeRelationshipFinder(classNames, FE);
+                    AD = new AnalysisDisplayer(file, FT, TRF);
+                    DisplayBasedOnCommandLineArguments(args, AD, FE);
+                }
             }
             Console.ReadKey();
         }
@@ -89,21 +92,15 @@ namespace CodeAnalyzerDLLClient
             {
                 FE = new FileExtractor(file);
                 FT = new FunctionTracker(FE);
-                FT.DetectFunctionsAndScopes();
-                //FT.CountLines();
+                //FT.DetectFunctionsAndScopes();
                 CNF = new ClassNameFinder(FE, FT);
 
                 foreach (var className in CNF.GetAllClassNames())
                 {
                     classNames = classNames.Append(className);
                 }
-                AD = new AnalysisDisplayer(file, FT, CNF);
-                //AD.DisplayAnalysisToStandardOutput();
-                DisplayBasedOnCommandLineArguments(args, AD, FE);
-                /*foreach (string line in FE.GetExtractedLines())
-                {
-                    Console.WriteLine(line);
-                }*/
+                //AD = new AnalysisDisplayer(file, FT, CNF);
+                //DisplayBasedOnCommandLineArguments(args, AD, FE);
             }
         }
         private static string GetPathFromCommandLine(string[] args)
