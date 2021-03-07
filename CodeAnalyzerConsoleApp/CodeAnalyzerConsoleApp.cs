@@ -42,9 +42,16 @@ namespace CodeAnalyzerDLLClient
     {
         static FileExtractor FE;
         static FunctionTracker FT;
-        static ClassRelationshipFinder CRF;
+        static ClassNameFinder CNF;
         static AnalysisDisplayer AD;
-        static List<string> list;
+        static TypeRelationshipFinder TRF;
+        static IEnumerable<string> classNames;
+
+        static CodeAnalyzerConsoleApp()
+        {
+            classNames = new List<string>();
+        }
+
 #if(test_codeanalyzerconsoleapp)
         static void Main(string[] args)
         {
@@ -67,19 +74,19 @@ namespace CodeAnalyzerDLLClient
                 //DS.AddFileNamesToList(DS.GetFilesWithFullPath());
                 Console.WriteLine("Path: {0}\n", path);
                 //DisplayListOfFoundFiles(DS);
-                /*FileExtractor FE;
-                FunctionTracker FT;
-                ClassRelationshipFinder CRF;
-                AnalysisDisplayer AD;*/
                 foreach (string file in DS.GetFilesWithFullPath())
                 {
                     FE = new FileExtractor(file);
                     FT = new FunctionTracker(FE);
                     FT.DetectFunctionsAndScopes();
                     //FT.CountLines();
-                    CRF = new ClassRelationshipFinder(FE, FT);
+                    CNF = new ClassNameFinder(FE, FT);
                     
-                    AD = new AnalysisDisplayer(file, FT, CRF);
+                    foreach(var className in CNF.GetAllClassNames())
+                    {
+                        classNames = classNames.Append(className);
+                    }
+                    AD = new AnalysisDisplayer(file, FT, CNF);
                     //AD.DisplayAnalysisToStandardOutput();
 
 
@@ -90,9 +97,14 @@ namespace CodeAnalyzerDLLClient
                     {
                         Console.WriteLine(line);
                     }*/
-                    
                 }
-                CRF.TypeRelationships();
+                classNames = classNames.Distinct();
+                classNames = classNames.ToList();
+                foreach (var classname in classNames)
+                {
+                    Console.WriteLine(classname);
+                }
+                //TRF = new TypeRelationshipFinder();
             }
             Console.ReadKey();
         }

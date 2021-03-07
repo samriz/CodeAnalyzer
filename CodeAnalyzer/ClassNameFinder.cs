@@ -35,23 +35,25 @@ using System.Threading.Tasks;
 
 namespace CodeAnalyzer
 {
-    public class ClassRelationshipFinder
+    public class ClassNameFinder
     {
         private FileExtractor FE;
         private FunctionTracker FT;
         private static readonly string inheritancePattern;
-        static List<string> distinctClassNamesList;
-        static ClassRelationshipFinder()
+        List<string> distinctClassNamesList;
+        static ClassNameFinder()
         {
             inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";
-            distinctClassNamesList = new List<string>();
+            
         }
-        public ClassRelationshipFinder(FileExtractor FE, FunctionTracker FT)
+        public ClassNameFinder(FileExtractor FE, FunctionTracker FT)
         {
             this.FE = FE;
             this.FT = FT;
+            distinctClassNamesList = new List<string>();
         }
-        public void TypeRelationships()
+
+        public List<string> GetAllClassNames()
         {
             List<string> classNames = new List<string>();
 
@@ -59,27 +61,16 @@ namespace CodeAnalyzer
             {
                 classNames.Add(node.GetClassName());
             }
-
             IEnumerable<string> distinctClassNames = classNames.Distinct();
-            distinctClassNamesList = distinctClassNames.ToList();
-            
-            for (int i = 0; i < distinctClassNamesList.Count(); i++)
+            List<string> distinctClassNamesList = new List<string>();
+
+            for (int i = 0; i < distinctClassNames.ToList().Count; i++)
             {
-                string[] s = distinctClassNamesList[i].Split(' ');
+                string[] s = distinctClassNames.ElementAt(i).ToString().Split(' ');
                 string justclassname = (string)s.GetValue(s.Length - 1);
                 distinctClassNamesList.Add(justclassname);
             }
-            foreach(var classname in distinctClassNamesList)
-            {
-                Console.WriteLine(classname);
-            }
-            /*foreach(var line in this.FE.GetExtractedLines())
-            {
-                foreach(var distinct in distinctClassNamesList)
-                {
-                    
-                }
-            }*/
+            return distinctClassNamesList;
         }
         public bool InheritanceExists()
         {
