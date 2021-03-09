@@ -40,6 +40,11 @@ namespace CodeAnalyzer
         private List<string> AllExtractedLines;
         string file;
 
+        public FileExtractor()
+        {
+
+        }
+
         public FileExtractor(string file)
         {
             this.file = file;

@@ -43,8 +43,11 @@ namespace CodeAnalyzer
         List<string> distinctClassNamesList;
         static ClassNameFinder()
         {
-            inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";
-            
+            inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";       
+        }
+        public ClassNameFinder()
+        {
+
         }
         public ClassNameFinder(FileExtractor FE, FunctionTracker FT)
         {
@@ -83,18 +86,6 @@ namespace CodeAnalyzer
                     return true;
                 }
             }
-            return false;
-        }
-        public bool AggregationExists()
-        {
-            return false;
-        }
-        public bool CompositionExists()
-        {
-            return false;
-        }
-        public bool UsingExists()
-        {
             return false;
         }
 #if (test_classrelationshipfinder)

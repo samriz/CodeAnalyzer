@@ -38,19 +38,19 @@ namespace CodeAnalyzer
         //private static readonly string XML_Name;
         private string XML_Name;
         private FunctionTracker FT;
+        List<FunctionNode> functionNodes;
         //private ClassNameFinder CNF;
         private TypeRelationshipFinder TRF;
         //private List<FunctionNode> functionScopes;
 
-        static AnalysisDisplayer()
+        public AnalysisDisplayer()
         {
-            //XML_Name = Directory.GetCurrentDirectory() + @"\Analysis.xml";
+
         }
-        public AnalysisDisplayer(string file, FunctionTracker FT)
+        public AnalysisDisplayer(string file, List<FunctionNode> functionNodes)
         {
             this.XML_Name = file + "_analysis.xml";
-            this.FT = FT;
-            this.TRF = TRF;
+            this.functionNodes = functionNodes;
         }
         public AnalysisDisplayer(string file, FunctionTracker FT, TypeRelationshipFinder TRF)
         {
@@ -70,7 +70,7 @@ namespace CodeAnalyzer
         public void DisplayAnalysisToStandardOutput()
         {
             //foreach (FunctionNode functionScope in functionScopes)
-            foreach (var node in FT.GetFunctionNodes())
+            foreach (var node in functionNodes)
             {
                 Console.WriteLine("Class: {0}", node.GetClassName());
                 Console.WriteLine("Function name: {0}", node.GetFunctionName());
@@ -81,7 +81,7 @@ namespace CodeAnalyzer
         }
         public void DisplayAnalysisToXML()
         { 
-            if(FT.GetFunctionNodes().Count < 1)
+            if(functionNodes.Count < 1)
             //if(functionScopes.Count < 1)
             {
                 return;
@@ -97,37 +97,36 @@ namespace CodeAnalyzer
             XmlElement rootElement = analysisXML.CreateElement("Class");
             XmlNode rootNode = rootElement;
 
-            XmlElement classNameElement = analysisXML.CreateElement("ClassName");
-            classNameElement.InnerText = FT.GetFunctionNodes()[0].GetClassName();
+            /*XmlElement classNameElement = analysisXML.CreateElement("ClassName");
+            classNameElement.InnerText = functionNodes[0].GetClassName();
             XmlNode classNameNode = classNameElement;
+            rootNode.AppendChild(classNameNode);*/
 
-            XmlElement functionElement;
+            /*XmlElement functionElement;
             XmlNode functionNode;
             XmlElement functionNameElement;
             XmlNode functionNameNode;
             XmlElement scopeElement;
             XmlNode scopeNode;
             XmlElement linesElement;
-            XmlNode linesNode;
+            XmlNode linesNode;*/            
 
-            rootNode.AppendChild(classNameNode);
-
-            foreach (FunctionNode node in FT.GetFunctionNodes())
+            foreach (FunctionNode node in functionNodes)
             {
-                functionElement = analysisXML.CreateElement("Function");
-                functionNode = functionElement;
+                XmlElement functionElement = analysisXML.CreateElement("Function");
+                XmlNode functionNode = functionElement;
 
-                functionNameElement = analysisXML.CreateElement("FunctionName");
+                XmlElement functionNameElement = analysisXML.CreateElement("FunctionName");
                 functionNameElement.InnerText = node.GetFunctionName();
-                functionNameNode = functionNameElement;
+                XmlNode functionNameNode = functionNameElement;
 
-                scopeElement = analysisXML.CreateElement("NumberOfScopes");
+                XmlElement scopeElement = analysisXML.CreateElement("NumberOfScopes");
                 scopeElement.InnerText = node.GetNumberOfScopes().ToString();
-                scopeNode = scopeElement;
+                XmlNode scopeNode = scopeElement;
 
-                linesElement = analysisXML.CreateElement("NumberOfLines");
+                XmlElement linesElement = analysisXML.CreateElement("NumberOfLines");
                 linesElement.InnerText = node.GetNumberOfLines().ToString();
-                linesNode = linesElement;
+                XmlNode linesNode = linesElement;
 
                 functionNode.AppendChild(functionNameNode);
                 functionNode.AppendChild(scopeNode);
@@ -173,15 +172,6 @@ namespace CodeAnalyzer
 
 
         }
-        /*private int CountStatements(List<string> lines)
-        {
-            int statementCount = 0;
-            foreach (string line in lines)
-            {
-                if (line.EndsWith(";")) ++statementCount;
-            }
-            return statementCount;
-        }*/
 #if (test_analysisdisplayer)
         static void Main(string[] args)
         {

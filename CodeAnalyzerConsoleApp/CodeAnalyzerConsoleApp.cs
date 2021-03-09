@@ -48,16 +48,18 @@ namespace CodeAnalyzerDLLClient
         TypeRelationshipFinder TRF;
         IEnumerable<string> classNames;*/
         static DirectorySearcher DS;
-        static FileExtractor FE;
-        static FunctionTracker FT;
-        static ClassNameFinder CNF;
-        static AnalysisDisplayer AD;
-        static TypeRelationshipFinder TRF;
+        //static FileExtractor FE;
+        //static FunctionTracker FT;
+        //static ClassNameFinder CNF;
+        //static AnalysisDisplayer AD;
+        //static TypeRelationshipFinder TRF;
         static IEnumerable<string> classNames;
+        static List<FunctionNode> functionNodes;
 
         static CodeAnalyzerConsoleApp()
         {
             classNames = new List<string>();
+            functionNodes = new List<FunctionNode>();
         }
 
 #if(test_codeanalyzerconsoleapp)
@@ -76,7 +78,13 @@ namespace CodeAnalyzerDLLClient
                 DS = new DirectorySearcher(path);
                 SetFilesBasedOnCommandLineArguments(args, DS);
                 Console.WriteLine("Path: {0}\n", path);
-                SearchAndAnalyze(args);
+
+                FileExtractor FE = new FileExtractor();
+                FunctionTracker FT = new FunctionTracker();
+                ClassNameFinder CNF = new ClassNameFinder();
+                AnalysisDisplayer AD = new AnalysisDisplayer();
+
+                SearchAndAnalyze(args, FE, FT, CNF, AD);
                 classNames = classNames.Distinct();
                 classNames = classNames.ToList();
                 
@@ -88,26 +96,28 @@ namespace CodeAnalyzerDLLClient
             Console.ReadKey();
         }
 #endif
-        private static void SearchAndAnalyze(string[] args)
+        private static void SearchAndAnalyze(string[] args, FileExtractor FE, FunctionTracker FT, ClassNameFinder CNF, AnalysisDisplayer AD)
         {
             foreach (string file in DS.GetFilesWithFullPath())
             {
                 FE = new FileExtractor(file);
                 FT = new FunctionTracker(FE);
                 FT.DetectFunctionsAndScopes();
+                functionNodes.AddRange(FT.GetFunctionNodes());
                 CNF = new ClassNameFinder(FE, FT);
 
                 foreach (var className in CNF.GetAllClassNames())
                 {
                     classNames = classNames.Append(className);
                 }
-                AD = new AnalysisDisplayer(file, FT);
+                AD = new AnalysisDisplayer(file, FT.GetFunctionNodes());
                 DisplayBasedOnCommandLineArguments(args, AD, FE);
             }
         }
         private static string GetPathFromCommandLine(string[] args)
         {
             string path = Path.GetFullPath(args[0]);
+            //string path = args[0];
             return path;
         }
         private static void DisplayListOfFoundFiles(DirectorySearcher DS)

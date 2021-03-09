@@ -1,5 +1,4 @@
 <Class>
-  <ClassName>public class AnalysisDisplayer</ClassName>
   <Function>
     <FunctionName>public string GetXMLName()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
@@ -12,11 +11,16 @@
   </Function>
   <Function>
     <FunctionName>public void DisplayAnalysisToXML()</FunctionName>
-    <NumberOfScopes>3</NumberOfScopes>
-    <NumberOfLines>36</NumberOfLines>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>17</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void CreateXMLDocument()</FunctionName>
+    <NumberOfScopes>1</NumberOfScopes>
+    <NumberOfLines>60</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private void CreateXMLDocumentUsingXmlWriter()</FunctionName>
     <NumberOfScopes>1</NumberOfScopes>
     <NumberOfLines>80</NumberOfLines>
   </Function>
