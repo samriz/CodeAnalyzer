@@ -88,18 +88,71 @@ namespace CodeAnalyzer
             }
             else
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
+                CreateXMLDocument();     
+            }
+        }
+        public void CreateXMLDocument()
+        {
+            XmlDocument analysisXML = new XmlDocument();
+            XmlElement rootElement = analysisXML.CreateElement("Class");
+            XmlNode rootNode = rootElement;
+
+            XmlElement classNameElement = analysisXML.CreateElement("ClassName");
+            classNameElement.InnerText = FT.GetFunctionNodes()[0].GetClassName();
+            XmlNode classNameNode = classNameElement;
+
+            XmlElement functionElement;
+            XmlNode functionNode;
+            XmlElement functionNameElement;
+            XmlNode functionNameNode;
+            XmlElement scopeElement;
+            XmlNode scopeNode;
+            XmlElement linesElement;
+            XmlNode linesNode;
+
+            rootNode.AppendChild(classNameNode);
+
+            foreach (FunctionNode node in FT.GetFunctionNodes())
+            {
+                functionElement = analysisXML.CreateElement("Function");
+                functionNode = functionElement;
+
+                functionNameElement = analysisXML.CreateElement("FunctionName");
+                functionNameElement.InnerText = node.GetFunctionName();
+                functionNameNode = functionNameElement;
+
+                scopeElement = analysisXML.CreateElement("NumberOfScopes");
+                scopeElement.InnerText = node.GetNumberOfScopes().ToString();
+                scopeNode = scopeElement;
+
+                linesElement = analysisXML.CreateElement("NumberOfLines");
+                linesElement.InnerText = node.GetNumberOfLines().ToString();
+                linesNode = linesElement;
+
+                functionNode.AppendChild(functionNameNode);
+                functionNode.AppendChild(scopeNode);
+                functionNode.AppendChild(linesNode);
+                rootNode.AppendChild(functionNode);
+            }
+            analysisXML.AppendChild(rootNode);
+            analysisXML.Save(XML_Name);
+        }
+
+        private void CreateXMLDocumentUsingXmlWriter()
+        {
+            /*XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
                 settings.IndentChars = ("    ");
                 settings.CloseOutput = true;
                 settings.OmitXmlDeclaration = true;
+                XmlDocument
                 using (XmlWriter writer = XmlWriter.Create(XML_Name, settings))
                 {
                     writer.WriteStartElement("CodeAnalyzer");
                     //foreach (var node in functionScopes)
                     foreach (FunctionNode node in FT.GetFunctionNodes())
                     {
-                        writer.WriteElementString("Analysis", "Class Name: " + node.GetClassName());
+                        writer.WriteStartElement("Analysis", "Class Name: " + node.GetClassName());
                         writer.WriteElementString("Analysis", "Function Name: " + node.GetFunctionName());
                         writer.WriteElementString("Analysis", "Number of Scopes: " + node.GetNumberOfScopes());
                         writer.WriteElementString("Analysis", "Number of Lines: " + node.GetNumberOfLines());
@@ -107,9 +160,9 @@ namespace CodeAnalyzer
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
                     writer.Flush();
-                }
-            }
+                }*/
         }
+
         public void DisplayRelationshipsToConsole()
         {
             
