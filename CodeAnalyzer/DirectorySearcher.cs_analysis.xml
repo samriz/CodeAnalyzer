@@ -1,4 +1,5 @@
 <Class>
+  <ClassName>public class DirectorySearcher</ClassName>
   <Function>
     <FunctionName>public bool IsDirectoryPathTypeAString(string path)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>

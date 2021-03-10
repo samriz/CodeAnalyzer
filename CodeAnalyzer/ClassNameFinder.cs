@@ -38,16 +38,13 @@ namespace CodeAnalyzer
     public class ClassNameFinder
     {
         private static readonly string inheritancePattern;
-        //private List<string> distinctClassNamesList;
-        //private List<FunctionNode> functionNodes;
         static ClassNameFinder()
         {
-            inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";
-            
+            inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";           
         }
         public ClassNameFinder()
         {
-            //functionNodes = new List<FunctionNode>();
+            
         }
         public List<string> GetAllClassNames(List<FunctionNode> functionNodes)
         {

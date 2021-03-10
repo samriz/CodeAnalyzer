@@ -83,10 +83,10 @@ namespace CodeAnalyzer
             XmlElement rootElement = analysisXML.CreateElement("Class");
             XmlNode rootNode = rootElement;
 
-            /*XmlElement classNameElement = analysisXML.CreateElement("ClassName");
+            XmlElement classNameElement = analysisXML.CreateElement("ClassName");
             classNameElement.InnerText = functionNodes[0].GetClassName();
             XmlNode classNameNode = classNameElement;
-            rootNode.AppendChild(classNameNode);*/
+            rootNode.AppendChild(classNameNode);
 
             /*XmlElement functionElement;
             XmlNode functionNode;
