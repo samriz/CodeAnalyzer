@@ -105,13 +105,16 @@ namespace CodeAnalyzerDLLClient
                 FT.DetectFunctionsAndScopes();
                 functionNodes.AddRange(FT.GetFunctionNodes());
                 CNF = new ClassNameFinder();
-
-                foreach (var className in CNF.GetAllClassNames(functionNodes))
-                {
-                    classNames = classNames.Append(className);
-                }
+                CollectClassNames(CNF);
                 AD = new AnalysisDisplayer(file, FT.GetFunctionNodes());
                 DisplayBasedOnCommandLineArguments(args, AD, FE);
+            }
+        }
+        private static void CollectClassNames(ClassNameFinder CNF)
+        {           
+            foreach (var className in CNF.GetAllClassNames(functionNodes))
+            {
+                classNames = classNames.Append(className);
             }
         }
         private static string GetPathFromCommandLine(string[] args)
