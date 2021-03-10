@@ -40,7 +40,7 @@ namespace CodeAnalyzer
         static List<string> keywords = new List<string> { "namespace", "class", "if", "for", "foreach", "while", "do", "public", "private", "static", "void", "{", "}" };
 
         FileExtractor FE;
-        private static List<FunctionNode> functionNodes;
+        private List<FunctionNode> functionNodes;
 
         //regular expression patterns:
         private static readonly string namespacePattern;
@@ -68,12 +68,13 @@ namespace CodeAnalyzer
             //endScopePattern = @"\){";
             endBracePattern = @"\}";
 
-            functionNodes = new List<FunctionNode>();
+            
         }
         public FunctionTracker()
         {
             //Console.WriteLine("FunctionTracker Default Constructor is invoked.");
-            FE = null;         
+            FE = null;
+            functionNodes = new List<FunctionNode>();
         }
         public FunctionTracker(FileExtractor FE) : this()
         {

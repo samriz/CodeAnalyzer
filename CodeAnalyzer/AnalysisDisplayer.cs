@@ -37,39 +37,26 @@ namespace CodeAnalyzer
     {
         //private static readonly string XML_Name;
         private string XML_Name;
-        private FunctionTracker FT;
         List<FunctionNode> functionNodes;
-        //private ClassNameFinder CNF;
-        private TypeRelationshipFinder TRF;
-        //private List<FunctionNode> functionScopes;
 
         public AnalysisDisplayer()
         {
 
         }
-        public AnalysisDisplayer(string file, List<FunctionNode> functionNodes)
+        public AnalysisDisplayer(string XML_Name, List<FunctionNode> functionNodes) : this(XML_Name)
         {
-            this.XML_Name = file + "_analysis.xml";
             this.functionNodes = functionNodes;
         }
-        public AnalysisDisplayer(string file, FunctionTracker FT, TypeRelationshipFinder TRF)
+        public AnalysisDisplayer(string XML_Name)
         {
-            this.XML_Name = file + "_analysis.xml";
-            this.FT = FT;
-            this.TRF = TRF;
+            this.XML_Name = XML_Name + "_analysis.xml";
         }
-        /*public AnalysisDisplayer(string file, List<FunctionNode> functionScopes) 
-        {
-            this.XML_Name = file + "_analysis.xml";
-            this.functionScopes = functionScopes;
-        }*/
         public string GetXMLName()
         {
             return XML_Name;
         }
         public void DisplayAnalysisToStandardOutput()
         {
-            //foreach (FunctionNode functionScope in functionScopes)
             foreach (var node in functionNodes)
             {
                 Console.WriteLine("Class: {0}", node.GetClassName());
@@ -82,7 +69,6 @@ namespace CodeAnalyzer
         public void DisplayAnalysisToXML()
         { 
             if(functionNodes.Count < 1)
-            //if(functionScopes.Count < 1)
             {
                 return;
             }

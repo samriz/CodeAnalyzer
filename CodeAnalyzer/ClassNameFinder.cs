@@ -37,30 +37,23 @@ namespace CodeAnalyzer
 {
     public class ClassNameFinder
     {
-        private FileExtractor FE;
-        private FunctionTracker FT;
         private static readonly string inheritancePattern;
-        List<string> distinctClassNamesList;
+        //private List<string> distinctClassNamesList;
+        //private List<FunctionNode> functionNodes;
         static ClassNameFinder()
         {
-            inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";       
+            inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";
+            
         }
         public ClassNameFinder()
         {
-
+            //functionNodes = new List<FunctionNode>();
         }
-        public ClassNameFinder(FileExtractor FE, FunctionTracker FT)
-        {
-            this.FE = FE;
-            this.FT = FT;
-            distinctClassNamesList = new List<string>();
-        }
-
-        public List<string> GetAllClassNames()
+        public List<string> GetAllClassNames(List<FunctionNode> functionNodes)
         {
             List<string> classNames = new List<string>();
 
-            foreach(var node in this.FT.GetFunctionNodes())
+            foreach(var node in functionNodes)
             {
                 classNames.Add(node.GetClassName());
             }
@@ -75,10 +68,10 @@ namespace CodeAnalyzer
             }
             return distinctClassNamesList;
         }
-        public bool InheritanceExists()
+        public bool InheritanceExists(List<string> ExtractedLines)
         {
             Match inheritanceMatch;
-            foreach(var line in FE.GetExtractedLines())
+            foreach(var line in ExtractedLines)
             {
                 inheritanceMatch = Regex.Match(line, inheritancePattern);
                 if (inheritanceMatch.Success)

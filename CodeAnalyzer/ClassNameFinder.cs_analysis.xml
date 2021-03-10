@@ -1,72 +1,12 @@
 <Class>
   <Function>
-    <FunctionName>public string GetXMLName()</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>2</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void DisplayAnalysisToStandardOutput()</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>7</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void DisplayAnalysisToXML()</FunctionName>
-    <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>17</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void CreateXMLDocument()</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>60</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>private void CreateXMLDocumentUsingXmlWriter()</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>80</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void DisplayRelationshipsToConsole()</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>83</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void DisplayRelationshipsToXML()</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>86</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>/*private int CountStatements(List&lt;string&gt; lines)</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>93</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>static void Main(string[] args)</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>95</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public bool InheritanceExists()</FunctionName>
+    <FunctionName>public bool InheritanceExists(List&lt;string&gt; ExtractedLines)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
     <NumberOfLines>11</NumberOfLines>
   </Function>
   <Function>
-    <FunctionName>public bool AggregationExists()</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>13</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public bool CompositionExists()</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>15</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public bool UsingExists()</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>17</NumberOfLines>
-  </Function>
-  <Function>
     <FunctionName>static void Main(string[] args)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>19</NumberOfLines>
+    <NumberOfLines>13</NumberOfLines>
   </Function>
 </Class>

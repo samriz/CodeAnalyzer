@@ -104,9 +104,9 @@ namespace CodeAnalyzerDLLClient
                 FT = new FunctionTracker(FE);
                 FT.DetectFunctionsAndScopes();
                 functionNodes.AddRange(FT.GetFunctionNodes());
-                CNF = new ClassNameFinder(FE, FT);
+                CNF = new ClassNameFinder();
 
-                foreach (var className in CNF.GetAllClassNames())
+                foreach (var className in CNF.GetAllClassNames(functionNodes))
                 {
                     classNames = classNames.Append(className);
                 }
