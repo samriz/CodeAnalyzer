@@ -101,7 +101,7 @@ namespace CodeAnalyzerDLLClient
             foreach (string file in DS.GetFilesWithFullPath())
             {
                 FE = new FileExtractor(file);
-                FT = new FunctionTracker(FE);
+                FT = new FunctionTracker(FE.GetExtractedLines());
                 FT.DetectFunctionsAndScopes();
                 functionNodes.AddRange(FT.GetFunctionNodes());
                 CNF = new ClassNameFinder();

@@ -3,36 +3,36 @@
   <Function>
     <FunctionName>public void DetectFunctionsAndScopes()</FunctionName>
     <NumberOfScopes>12</NumberOfScopes>
-    <NumberOfLines>99</NumberOfLines>
+    <NumberOfLines>100</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>/*public void CountLines()</FunctionName>
     <NumberOfScopes>10</NumberOfScopes>
-    <NumberOfLines>161</NumberOfLines>
+    <NumberOfLines>162</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>private void RemoveUsings(List&lt;string&gt; lines)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>171</NumberOfLines>
+    <NumberOfLines>172</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>private int FindPositionOfNamespace(List&lt;string&gt; list)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>185</NumberOfLines>
+    <NumberOfLines>186</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>/*private int CountLines(List&lt;string&gt; lines)</FunctionName>
     <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>192</NumberOfLines>
+    <NumberOfLines>193</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>/*private void RemoveWhiteSpaceAndBlankNewLines(List&lt;string&gt; lines)</FunctionName>
     <NumberOfScopes>3</NumberOfScopes>
-    <NumberOfLines>204</NumberOfLines>
+    <NumberOfLines>205</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>static void Main(string[] args)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>206</NumberOfLines>
+    <NumberOfLines>207</NumberOfLines>
   </Function>
 </Class>

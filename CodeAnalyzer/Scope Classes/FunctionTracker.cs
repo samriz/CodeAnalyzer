@@ -39,8 +39,8 @@ namespace CodeAnalyzer
         //need to figure out how to detect namespaces, class, functions, etc. and analyze them
         static List<string> keywords = new List<string> { "namespace", "class", "if", "for", "foreach", "while", "do", "public", "private", "static", "void", "{", "}" };
 
-        FileExtractor FE;
-        private List<FunctionNode> functionNodes;
+        readonly List<string> ExtractedLines;
+        readonly private List<FunctionNode> functionNodes;
 
         //regular expression patterns:
         private static readonly string namespacePattern;
@@ -66,21 +66,16 @@ namespace CodeAnalyzer
             elsePattern = @"else\s*{";
             doWhilePattern = @"(do)\s*\{";
             //endScopePattern = @"\){";
-            endBracePattern = @"\}";
-
-            
+            endBracePattern = @"\}";    
         }
         public FunctionTracker()
         {
-            //Console.WriteLine("FunctionTracker Default Constructor is invoked.");
-            FE = null;
+            ExtractedLines = new List<string>();
             functionNodes = new List<FunctionNode>();
         }
-        public FunctionTracker(FileExtractor FE) : this()
+        public FunctionTracker(List<string> ExtractedLines) : this()
         {
-            //Console.WriteLine("FunctionTracker Parameterized Constructor is invoked.\n");
-            //List<string> extractedLines = FE.GetExtractedLines();
-            this.FE = FE;            
+            this.ExtractedLines = ExtractedLines;
         }
         public void DetectFunctionsAndScopes()
         {
@@ -100,7 +95,8 @@ namespace CodeAnalyzer
             string className = "";
             string namespaceName = "";
 
-            List<string> adjustedLines = FE.GetExtractedLines();
+            //List<string> adjustedLines = FE.GetExtractedLines();
+            List<string> adjustedLines = ExtractedLines;
             //List<string> adjustedLines = new List<string>(FE.GetExtractedLines());
             //adjustedLines = RemoveWhiteSpaceAndBlankNewLines(adjustedLines);
             adjustedLines = TrimLines(adjustedLines);
