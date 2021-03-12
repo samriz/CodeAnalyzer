@@ -8,26 +8,26 @@
   <Function>
     <FunctionName>public void SetExtractedLines(string file) =&gt; AllExtractedLines = File.ReadAllLines(file).ToList&lt;string&gt;()</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>20</NumberOfLines>
+    <NumberOfLines>17</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetFile(string file) =&gt; this.file = file</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>36</NumberOfLines>
+    <NumberOfLines>16</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>private int FindPositionOfNamespace(List&lt;string&gt; list)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>51</NumberOfLines>
+    <NumberOfLines>15</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>/*public int CountStatements(List&lt;string&gt; lines)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>61</NumberOfLines>
+    <NumberOfLines>10</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>static void Main(string[] args)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>63</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
 </Class>

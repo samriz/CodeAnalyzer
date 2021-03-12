@@ -2,37 +2,27 @@
   <ClassName>public class FunctionTracker</ClassName>
   <Function>
     <FunctionName>public void DetectFunctionsAndScopes()</FunctionName>
-    <NumberOfScopes>12</NumberOfScopes>
-    <NumberOfLines>100</NumberOfLines>
+    <NumberOfScopes>6</NumberOfScopes>
+    <NumberOfLines>45</NumberOfLines>
   </Function>
   <Function>
-    <FunctionName>/*public void CountLines()</FunctionName>
-    <NumberOfScopes>10</NumberOfScopes>
-    <NumberOfLines>162</NumberOfLines>
+    <FunctionName>private void CollectFunctionData(List&lt;string&gt; functionLines, int functionPosition, ref FunctionNode FN, int scopeCount, int numberOfLines)</FunctionName>
+    <NumberOfScopes>6</NumberOfScopes>
+    <NumberOfLines>39</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>private void RemoveUsings(List&lt;string&gt; lines)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>172</NumberOfLines>
+    <NumberOfLines>10</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>private int FindPositionOfNamespace(List&lt;string&gt; list)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>186</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>/*private int CountLines(List&lt;string&gt; lines)</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>193</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>/*private void RemoveWhiteSpaceAndBlankNewLines(List&lt;string&gt; lines)</FunctionName>
-    <NumberOfScopes>3</NumberOfScopes>
-    <NumberOfLines>205</NumberOfLines>
+    <NumberOfLines>14</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>static void Main(string[] args)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>207</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
 </Class>

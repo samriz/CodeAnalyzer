@@ -8,76 +8,76 @@
   <Function>
     <FunctionName>public string GetFunctionName()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>4</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public string GetNamespaceName()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>6</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public int GetNumberOfScopes()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>8</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public int GetNumberOfLines()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>10</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetNamespaceName(string namespaceName) =&gt; this.namespaceName = namespaceName</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>24</NumberOfLines>
+    <NumberOfLines>14</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetClassName(string className) =&gt; this.className = className</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>37</NumberOfLines>
+    <NumberOfLines>13</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetFunctionName(string functionName) =&gt; this.functionName = functionName</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>49</NumberOfLines>
+    <NumberOfLines>12</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetNumberOfScopes(int numberOfScopes) =&gt; this.numberOfScopes = numberOfScopes</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>60</NumberOfLines>
+    <NumberOfLines>11</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetNumberOfLines(int numberOfLines) =&gt; this.numberOfLines = numberOfLines</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>70</NumberOfLines>
+    <NumberOfLines>10</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public string GetScopeHead()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>72</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetScopeHead(string scopeHead) =&gt; this.scopeHead = scopeHead</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>75</NumberOfLines>
+    <NumberOfLines>3</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void AddChild(ScopeNode sn) =&gt; children.Add(sn)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>78</NumberOfLines>
+    <NumberOfLines>3</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public ScopeNode GetParent()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>80</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetParent(ScopeNode parent) =&gt; this.parent = parent</FunctionName>
     <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>86</NumberOfLines>
+    <NumberOfLines>6</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void PrintChildren()</FunctionName>
     <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>91</NumberOfLines>
+    <NumberOfLines>5</NumberOfLines>
   </Function>
 </Class>

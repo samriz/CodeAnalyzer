@@ -8,31 +8,31 @@
   <Function>
     <FunctionName>public void SetDirectoryPath(string DirectoryPath) =&gt; this.DirectoryPath = DirectoryPath</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>15</NumberOfLines>
+    <NumberOfLines>5</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetFilesInDirectory(List&lt;string&gt; FilesWithFullPath)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>19</NumberOfLines>
+    <NumberOfLines>4</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public string GetDirectoryPath()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>21</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public string GetFilenameExtension()</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>23</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void AddFileNamesToList(List&lt;string&gt; Files)</FunctionName>
     <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>29</NumberOfLines>
+    <NumberOfLines>6</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>static void Main(string[] args)</FunctionName>
     <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>36</NumberOfLines>
+    <NumberOfLines>7</NumberOfLines>
   </Function>
 </Class>

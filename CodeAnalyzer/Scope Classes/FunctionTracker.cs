@@ -36,8 +36,20 @@ namespace CodeAnalyzer
 {
     public class FunctionTracker
     {
-        //need to figure out how to detect namespaces, class, functions, etc. and analyze them
-        static List<string> keywords = new List<string> { "namespace", "class", "if", "for", "foreach", "while", "do", "public", "private", "static", "void", "{", "}" };
+        //static List<string> keywords = new List<string> { "namespace", "class", "if", "for", "foreach", "while", "do", "public", "private", "static", "void", "{", "}" };
+        private Match namespaceMatch;
+        private Match classMatch;
+        private Match functionMatch1;
+        private Match openingBraceMatch;
+        private Match startScopeMatch;
+        private Match endBraceMatch;
+        private Match doWhileMatch;
+        private Match elseMatch;
+        //int scopeCount;
+        //int numberOfLines;
+        Stack functionStack;
+        string className;
+        string namespaceName;
 
         readonly List<string> ExtractedLines;
         readonly private List<FunctionNode> functionNodes;
@@ -55,7 +67,6 @@ namespace CodeAnalyzer
 
         static FunctionTracker()
         {
-            //Console.WriteLine("FunctionTracker Static Constructor is invoked.");
             namespacePattern = @"(namespace)\s+\w+\s*\{";
             classPattern = @"(class)\s+(\w+)\s*\{";
             //functionPattern = @"(\w+\s+)?(\w+\s+)?\w+\s+\w+\s*\(";
@@ -72,6 +83,10 @@ namespace CodeAnalyzer
         {
             ExtractedLines = new List<string>();
             functionNodes = new List<FunctionNode>();
+            
+            functionStack = new Stack();
+            className = "";
+            namespaceName = "";
         }
         public FunctionTracker(List<string> ExtractedLines) : this()
         {
@@ -79,32 +94,15 @@ namespace CodeAnalyzer
         }
         public void DetectFunctionsAndScopes()
         {
-            Stack functionStack = new Stack();
             int scopeCount = 0;
             int numberOfLines = 0;
             FunctionNode FN;
-            Match namespaceMatch;
-            Match classMatch;
-            Match functionMatch1;
-            Match openingBraceMatch;
-            Match startScopeMatch;
-            Match endBraceMatch;
-            Match doWhileMatch;
-            Match elseMatch;
             string functionName;
-            string className = "";
-            string namespaceName = "";
-
-            //List<string> adjustedLines = FE.GetExtractedLines();
             List<string> adjustedLines = ExtractedLines;
-            //List<string> adjustedLines = new List<string>(FE.GetExtractedLines());
-            //adjustedLines = RemoveWhiteSpaceAndBlankNewLines(adjustedLines);
             adjustedLines = TrimLines(adjustedLines);
             adjustedLines = AdjustScopes(adjustedLines);
-            //RemoveUsings(adjustedLines);
 
             for (int i = FindPositionOfNamespace(adjustedLines); i < adjustedLines.Count; i++)
-            //for (int i = 92; i < adjustedLines.Count; i++)
             {
                 namespaceMatch = Regex.Match(adjustedLines[i], namespacePattern);
                 if (namespaceMatch.Success)
@@ -136,113 +134,56 @@ namespace CodeAnalyzer
                     functionStack.Push(adjustedLines[i]);
                     functionName = adjustedLines[i].Remove(adjustedLines[i].Length - 1, 1);
                     FN = new FunctionNode(functionName);
-                    for(int j = i+1; j < adjustedLines.Count; j++) //traverse the function only
-                    {
-                        ++numberOfLines;
-                        startScopeMatch = Regex.Match(adjustedLines[j], startScopePattern);
-                        elseMatch = Regex.Match(adjustedLines[j], elsePattern);
-
-                        doWhileMatch = Regex.Match(adjustedLines[j], doWhilePattern);
-                        endBraceMatch = Regex.Match(adjustedLines[j], endBracePattern);
-                        openingBraceMatch = Regex.Match(adjustedLines[j], openingBracePattern);
-                        if (startScopeMatch.Success && openingBraceMatch.Success)
-                        //if (startScopeMatch.Success || elseMatch.Success || doWhileMatch.Success)
-                        {
-                            functionStack.Push(adjustedLines[j]);
-                        }
-                        if (elseMatch.Success && openingBraceMatch.Success)
-                        {
-                            functionStack.Push(adjustedLines[j]);
-                        }
-                        if (doWhileMatch.Success && openingBraceMatch.Success)
-                        {
-                            functionStack.Push(adjustedLines[j]);
-                        }
-                        if (endBraceMatch.Success)
-                        {
-                            ++scopeCount;
-                            functionStack.Pop();
-                        }
-                        if(functionStack.Count < 1)
-                        {
-                            --scopeCount; //decrease scopeCount by 1 so we don't take into account the curly brackets of the function itself
-                            FN.SetClassName(className);
-                            FN.SetNamespaceName(namespaceName);
-                            FN.SetNumberOfScopes(scopeCount);
-                            numberOfLines += scopeCount;
-                            FN.SetNumberOfLines(numberOfLines);
-                            functionNodes.Add(FN);
-                            break;
-                        }
-                    }
+                    CollectFunctionData(adjustedLines, i, ref FN, scopeCount, numberOfLines);
                     scopeCount = 0;
                 }
             }
         }
-        /*public void CountLines()
+
+        //gather information about function
+        private void CollectFunctionData(List<string> functionLines, int functionPosition, ref FunctionNode FN, int scopeCount, int numberOfLines)
         {
-            Stack functionStack = new Stack();
-            int numberOfLines = 0;
-            string functionName;
-            Match functionMatch;
-            Match startScopeMatch;
-            Match endScopeMatch;
-            Match doWhileMatch;
-            Match elseMatch;
-
-           for (int i = FindPositionOfNamespace(FE.GetExtractedLines()); i < FE.GetExtractedLines().Count; i++)
-            //for (int i = 0; i < FE.GetExtractedLines().Count; i++)
+            for (int j = functionPosition + 1; j < functionLines.Count; j++) //traverse the function only
             {
-                functionMatch = Regex.Match(FE.GetExtractedLines()[i], functionPattern);
+                ++numberOfLines;
+                startScopeMatch = Regex.Match(functionLines[j], startScopePattern);
+                elseMatch = Regex.Match(functionLines[j], elsePattern);
 
-                if (functionMatch.Success)
+                doWhileMatch = Regex.Match(functionLines[j], doWhilePattern);
+                endBraceMatch = Regex.Match(functionLines[j], endBracePattern);
+                openingBraceMatch = Regex.Match(functionLines[j], openingBracePattern);
+                if (startScopeMatch.Success && openingBraceMatch.Success)
                 {
-                    functionStack.Push(FE.GetExtractedLines()[i]);
-                    functionName = FE.GetExtractedLines()[i];
-                    functionName = functionName.Trim();
-                    //FN = new FunctionNode(lines[i]);
-                    for (int j = i + 1; j < FE.GetExtractedLines().Count; j++) //traverse the function only
-                    {
-                        ++numberOfLines;
-                        
-                        startScopeMatch = Regex.Match(FE.GetExtractedLines()[j], startScopePattern);
-                        elseMatch = Regex.Match(FE.GetExtractedLines()[j], elsePattern);
-
-                        doWhileMatch = Regex.Match(FE.GetExtractedLines()[j], doWhilePattern);
-                        endScopeMatch = Regex.Match(FE.GetExtractedLines()[j], endBracePattern);
-                        
-                        if (startScopeMatch.Success)
-                        {
-                            functionStack.Push(FE.GetExtractedLines()[j]);
-                        }
-                        if (elseMatch.Success)
-                        {
-                            functionStack.Push(FE.GetExtractedLines()[j]);
-                        }
-                        if (doWhileMatch.Success)
-                        {
-                            functionStack.Push(FE.GetExtractedLines()[j]);
-                        }
-                        if (endScopeMatch.Success)
-                        {
-                            functionStack.Pop();
-                        }
-                        if (functionStack.Count < 1)
-                        {
-                            foreach(var node in functionNodes)
-                            {
-                                if(functionName == node.GetFunctionName())
-                                {
-                                    node.SetNumberOfLines(numberOfLines);
-                                }
-                            }
-                            break;
-                        }
-                    }
-                    numberOfLines = 0;
+                    functionStack.Push(functionLines[j]);
+                }
+                if (elseMatch.Success && openingBraceMatch.Success)
+                {
+                    functionStack.Push(functionLines[j]);
+                }
+                if (doWhileMatch.Success && openingBraceMatch.Success)
+                {
+                    functionStack.Push(functionLines[j]);
+                }
+                if (endBraceMatch.Success)
+                {
+                    ++scopeCount;
+                    functionStack.Pop();
+                }
+                if (functionStack.Count < 1)
+                {
+                    --scopeCount; //decrease scopeCount by 1 so we don't take into account the curly brackets of the function itself
+                    FN.SetClassName(className);
+                    FN.SetNamespaceName(namespaceName);
+                    FN.SetNumberOfScopes(scopeCount);
+                    numberOfLines += scopeCount;
+                    FN.SetNumberOfLines(numberOfLines);
+                    functionNodes.Add(FN);
+                    break;
                 }
             }
-        }*/
+        }
+
+        //function to delete whitespace from a line as long as the line's length is greater than zero
         private List<string> TrimLines(List<string> lines)
         {
             for (int i = 0; i < lines.Count; i++)
@@ -253,27 +194,13 @@ namespace CodeAnalyzer
                 }
                 else
                 {
-                    //AllExtractedLines[i] = AllExtractedLines[i].Trim();
                     lines[i] = lines[i].Trim();
                 }
             }
             return lines;
         }
-        private List<string> RemoveWhiteSpaceAndBlankNewLines(List<string> lines)
-        {
-            for (int i = 0; i < lines.Count; i++)
-            {
-                if (lines[i].Length == 0)
-                {
-                    lines.RemoveAt(i);
-                }
-                else
-                {
-                    lines[i] = lines[i].Trim();
-                }
-            }
-            return lines;
-        }
+
+        //move an opening bracket to the line it is associated with
         private List<string> AdjustScopes(List<string> lines)
         {
             //for(int i = 1; i < scopeList.Count; i++)
@@ -287,7 +214,9 @@ namespace CodeAnalyzer
             }
             return lines;
         }
-        private List<string> FindAndRemoveComments(List<string> lines)
+
+        //find comments using Regex and Match class
+        private List<string> FindComments(List<string> lines)
         {
             Match singleLineCommentMatch;
             Match multiLineCommentMatch1;
@@ -299,6 +228,8 @@ namespace CodeAnalyzer
             }
             return lines;
         }
+
+        //remove lines that begin with "using"
         private void RemoveUsings(List<string> lines)
         {
             Match usingMatch;
@@ -311,6 +242,8 @@ namespace CodeAnalyzer
                 }
             }
         }
+
+        //find index in list where namespace is declared
         private int FindPositionOfNamespace(List<string> list)
         {
             int positionOfNamespace = 0;
@@ -327,48 +260,9 @@ namespace CodeAnalyzer
             }
             return positionOfNamespace;
         }
-        /*private int CountLines(List<string> lines)
-        {
-            int lineCount = 0;
-            foreach (string line in lines)
-            {
-                ++lineCount;
-            }
-            return lineCount;
-        }*/
-        /*private List<string> AdjustScopes(List<string> list)
-        {
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (list[i].Contains("{"))
-                {
-                    list[i - 1] = list[i - 1] + "{";
-                    list.RemoveAt(i);
-                }
-            }
-            return list;
-        }*/
-        /*private void RemoveWhiteSpaceAndBlankNewLines(List<string> lines)
-        {
-            for (int i = 0; i < lines.Count; i++)
-            {
-                if (lines[i].Length == 0)
-                {
-                    lines.Remove(lines[i]);
-                }
-                else
-                {
-                    lines[i] = lines[i].Trim();
-                }
-            }
-        }*/
         public List<FunctionNode> GetFunctionNodes()
         {
             return functionNodes;
-        }
-        public List<string> GetKeywords()
-        {
-            return keywords;
         }
 #if (test_functiontracker)
         static void Main(string[] args)

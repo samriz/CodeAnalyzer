@@ -8,6 +8,6 @@
   <Function>
     <FunctionName>static void Main(string[] args)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>13</NumberOfLines>
+    <NumberOfLines>2</NumberOfLines>
   </Function>
 </Class>
