@@ -45,9 +45,9 @@
     <Compile Include="DirectorySearcher.cs" />
     <Compile Include="FileExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scope Classes\FunctionTracker.cs" />
+    <Compile Include="FunctionTracker.cs" />
     <Compile Include="AnalysisDisplayer.cs" />
-    <Compile Include="Scope Classes\FunctionNode.cs" />
+    <Compile Include="FunctionNode.cs" />
     <Compile Include="TypeRelationshipFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
