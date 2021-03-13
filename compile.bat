@@ -1,1 +1,0 @@
-csc /out:CodeAnalyzerConsoleApp/bin/Debug/CodeAnalyzerConsoleApp.exe  AnalysisDisplayer.cs ClassNameFinder.cs DirectorySearcher.cs FileExtractor.cs FunctionNode.cs FunctionTracker.cs TypeRelationshipFinder.cs 
