@@ -1,0 +1,1 @@
+start CodeAnalyzerConsoleApp/bin/Debug/CodeAnalyzerConsoleApp.exe "CodeAnalyzerConsoleApp/" /S /X
