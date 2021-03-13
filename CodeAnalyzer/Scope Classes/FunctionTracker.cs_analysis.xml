@@ -1,0 +1,28 @@
+<Class>
+  <ClassName>public class FunctionTracker</ClassName>
+  <Function>
+    <FunctionName>public void DetectFunctionsAndScopes()</FunctionName>
+    <NumberOfScopes>6</NumberOfScopes>
+    <NumberOfLines>45</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private void CollectFunctionData(List&lt;string&gt; functionLines, int functionPosition, ref FunctionNode FN, int scopeCount, int numberOfLines)</FunctionName>
+    <NumberOfScopes>6</NumberOfScopes>
+    <NumberOfLines>39</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private void RemoveUsings(List&lt;string&gt; lines)</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>10</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private int FindPositionOfNamespace(List&lt;string&gt; list)</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>14</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>static void Main(string[] args)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>2</NumberOfLines>
+  </Function>
+</Class>

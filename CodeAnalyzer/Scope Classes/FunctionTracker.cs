@@ -152,8 +152,6 @@ namespace CodeAnalyzer
                 doWhileMatch = Regex.Match(functionLines[j], doWhilePattern);
                 endBraceMatch = Regex.Match(functionLines[j], endBracePattern);
                 openingBraceMatch = Regex.Match(functionLines[j], openingBracePattern);
-
-                //push and pop off stack based on matches
                 if (startScopeMatch.Success && openingBraceMatch.Success)
                 {
                     functionStack.Push(functionLines[j]);
