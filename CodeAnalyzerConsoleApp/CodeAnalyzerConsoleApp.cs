@@ -40,19 +40,6 @@ namespace CodeAnalyzerDLLClient
 {
     class CodeAnalyzerConsoleApp
     {
-        /*DirectorySearcher DS;
-        FileExtractor FE;
-        FunctionTracker FT;
-        ClassNameFinder CNF;
-        AnalysisDisplayer AD;
-        TypeRelationshipFinder TRF;
-        IEnumerable<string> classNames;*/
-        static DirectorySearcher DS;
-        //static FileExtractor FE;
-        //static FunctionTracker FT;
-        //static ClassNameFinder CNF;
-        //static AnalysisDisplayer AD;
-        //static TypeRelationshipFinder TRF;
         static IEnumerable<string> classNames;
         static List<FunctionNode> functionNodes;
 
@@ -75,20 +62,25 @@ namespace CodeAnalyzerDLLClient
             else
             {
                 string path = GetPathFromCommandLine(args);
-                DS = new DirectorySearcher(path);
+                DirectorySearcher DS = new DirectorySearcher(path);
                 SetFilesBasedOnCommandLineArguments(args, DS);
                 Console.WriteLine("Path: {0}\n", path);
 
                 FileExtractor FE = new FileExtractor();
                 FunctionTracker FT = new FunctionTracker();
-                ClassNameFinder CNF = new ClassNameFinder();
+                ClassNameFinder CNF;
                 AnalysisDisplayer AD = new AnalysisDisplayer();
+                TypeRelationshipFinder TRF = new TypeRelationshipFinder();
 
-                SearchAndAnalyze(args, FE, FT, CNF, AD);
+                CollectFunctionNodes(ref DS, ref FE, ref FT);
+                CNF = new ClassNameFinder();
+                CollectClassNames(ref CNF, ref DS);
+               
+                SearchAndAnalyze(args, ref DS, ref FE, ref FT, ref AD, ref TRF);
                 classNames = classNames.Distinct();
                 classNames = classNames.ToList();
                 
-                foreach(var className in classNames)
+                foreach (var className in classNames)
                 {
                     Console.WriteLine(className);
                 }
@@ -96,7 +88,22 @@ namespace CodeAnalyzerDLLClient
             Console.ReadKey();
         }
 #endif
-        private static void SearchAndAnalyze(string[] args, FileExtractor FE, FunctionTracker FT, ClassNameFinder CNF, AnalysisDisplayer AD)
+        private static void SearchAndAnalyze(string[] args, ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT, ref AnalysisDisplayer AD, ref TypeRelationshipFinder TRF)
+        {
+            foreach (string file in DS.GetFilesWithFullPath())
+            {
+                FE = new FileExtractor(file);   
+                FT = new FunctionTracker(FE.GetExtractedLines());
+                FT.DetectFunctionsAndScopes();
+                //functionNodes.AddRange(FT.GetFunctionNodes());
+                //CNF = new ClassNameFinder();
+                //CollectClassNames(CNF);
+                TRF = new TypeRelationshipFinder(classNames, FE.GetExtractedLines());
+                AD = new AnalysisDisplayer(file, FT.GetFunctionNodes());
+                DisplayBasedOnCommandLineArguments(args, AD, FE, TRF);
+            }
+        }
+        private static void CollectFunctionNodes(ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT)
         {
             foreach (string file in DS.GetFilesWithFullPath())
             {
@@ -104,23 +111,21 @@ namespace CodeAnalyzerDLLClient
                 FT = new FunctionTracker(FE.GetExtractedLines());
                 FT.DetectFunctionsAndScopes();
                 functionNodes.AddRange(FT.GetFunctionNodes());
-                CNF = new ClassNameFinder();
-                CollectClassNames(CNF);
-                AD = new AnalysisDisplayer(file, FT.GetFunctionNodes());
-                DisplayBasedOnCommandLineArguments(args, AD, FE);
             }
         }
-        private static void CollectClassNames(ClassNameFinder CNF)
-        {           
-            foreach (var className in CNF.GetAllClassNames(functionNodes))
+        private static void CollectClassNames(ref ClassNameFinder CNF, ref DirectorySearcher DS)
+        {          
+            foreach(string file in DS.GetFilesWithFullPath())
             {
-                classNames = classNames.Append(className);
-            }
+                foreach (var className in CNF.GetAllClassNames(functionNodes))
+                {
+                    classNames = classNames.Append(className);
+                }
+            } 
         }
         private static string GetPathFromCommandLine(string[] args)
         {
             string path = Path.GetFullPath(args[0]);
-            //string path = args[0];
             return path;
         }
         private static void DisplayListOfFoundFiles(DirectorySearcher DS)
@@ -218,11 +223,11 @@ namespace CodeAnalyzerDLLClient
                 }
             }
         }
-        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD, FileExtractor FE)
+        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD, FileExtractor FE, TypeRelationshipFinder TRF)
         {
             if(args.Length == 1)
             {
-                AD.DisplayAnalysisToStandardOutput();
+                AD.DisplayAnalysisToStandardOutput(TRF);
             }
             else if (args.Length == 2)
             {
@@ -238,7 +243,7 @@ namespace CodeAnalyzerDLLClient
                 }
                 else
                 {
-                    AD.DisplayAnalysisToStandardOutput();
+                    AD.DisplayAnalysisToStandardOutput(TRF);
                 }
             }
             else if(args.Length == 3 || args.Length == 4)
@@ -247,7 +252,7 @@ namespace CodeAnalyzerDLLClient
                     //if (!args.Contains("/X") && args.Contains("/S") || !args.Contains("/X") && args.Contains("/S") && args.Contains("/R"))
                     //if (args[i] != "/X" && args[i] == "/S" || args[i] != "/X" && args[i] == "/S" && args[i] == "/R")
                 {
-                    AD.DisplayAnalysisToStandardOutput();
+                    AD.DisplayAnalysisToStandardOutput(TRF);
                 }
                 else
                 {

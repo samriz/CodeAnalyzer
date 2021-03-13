@@ -38,7 +38,7 @@ namespace CodeAnalyzer
         //private static readonly string XML_Name;
         private string XML_Name;
         List<FunctionNode> functionNodes;
-
+        //private TypeRelationshipFinder TRF;
         public AnalysisDisplayer()
         {
 
@@ -55,7 +55,7 @@ namespace CodeAnalyzer
         {
             return XML_Name;
         }
-        public void DisplayAnalysisToStandardOutput()
+        public void DisplayAnalysisToStandardOutput(TypeRelationshipFinder TRF)
         {
             foreach (var node in functionNodes)
             {
@@ -64,7 +64,7 @@ namespace CodeAnalyzer
                 Console.WriteLine("Function complexity: {0}", node.GetNumberOfScopes());
                 Console.WriteLine("Number of lines: {0}\n", node.GetNumberOfLines());
             }
-            //TRF.FindRelationships();
+            TRF.FindRelationships();
         }
         public void DisplayAnalysisToXML()
         { 

@@ -6,7 +6,7 @@
     <NumberOfLines>2</NumberOfLines>
   </Function>
   <Function>
-    <FunctionName>public void DisplayAnalysisToStandardOutput()</FunctionName>
+    <FunctionName>public void DisplayAnalysisToStandardOutput(TypeRelationshipFinder TRF)</FunctionName>
     <NumberOfScopes>1</NumberOfScopes>
     <NumberOfLines>4</NumberOfLines>
   </Function>

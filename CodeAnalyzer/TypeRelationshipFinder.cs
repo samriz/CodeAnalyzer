@@ -8,22 +8,26 @@ namespace CodeAnalyzer
 {
     public class TypeRelationshipFinder
     {
-        List<string> classNames;
-        FileExtractor FE;
-        //List<string> fileLines;
-        public TypeRelationshipFinder(List<string> classNames, FileExtractor FE)
+        private readonly List<string> classNames;
+        private readonly List<string> fileLines;
+
+        public TypeRelationshipFinder()
+        {
+
+        }
+        public TypeRelationshipFinder(List<string> classNames, List<string> fileLines)
         {
             this.classNames = classNames;
-            this.FE = FE;
+            this.fileLines = fileLines;
         }
-        public TypeRelationshipFinder(IEnumerable<string> classNames, FileExtractor FE)
+        public TypeRelationshipFinder(IEnumerable<string> classNames, List<string> fileLines)
         {
             this.classNames = classNames.ToList();
-            this.FE = FE;
+            this.fileLines = fileLines;
         }
         public void FindRelationships()
         {
-            foreach(var line in FE.GetExtractedLines())
+            foreach(var line in fileLines)
             {
                 foreach(var className in classNames)
                 {
