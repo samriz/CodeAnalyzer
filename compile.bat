@@ -1,1 +1,12 @@
-csc /out:CodeAnalyzerConsoleApp/bin/Debug/CodeAnalyzerConsoleApp.exe  AnalysisDisplayer.cs ClassNameFinder.cs DirectorySearcher.cs FileExtractor.cs FunctionNode.cs FunctionTracker.cs TypeRelationshipFinder.cs 
+CodeAnalyzer -> CodeAnalyzer\bin\Debug\CodeAnalyzer.dll
+
+CodeAnalyzer -> CodeAnalyzer\bin\Debug\CodeAnalyzer.pdb
+
+CodeAnalyzerDLLClient -> CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzer.dll
+
+CodeAnalyzerDLLClient -> CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzer.pdb
+
+CodeAnalyzerDLLClient -> CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzerConsoleApp.exe
+
+CodeAnalyzerDLLClient -> CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzerConsoleApp.pdb
+
