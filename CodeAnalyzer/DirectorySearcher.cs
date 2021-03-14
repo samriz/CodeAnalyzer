@@ -95,15 +95,6 @@ namespace CodeAnalyzer
                 FileNames.Add(Path.GetFileName(File));
             }
         }
-        /*public DirectorySearcher(string DirectoryPath, string FilenameExtension = ".cs") //filename extension defaulted to .cs
-        {
-            this.DirectoryPath = DirectoryPath;
-            this.FilenameExtension = FilenameExtension;
-
-            //CSFiles = Directory.GetFiles(DirectoryPath, "*.cs", SearchOption.AllDirectories).ToList();
-            FilesWithFullPath = Directory.GetFiles(DirectoryPath, "*" + FilenameExtension, SearchOption.AllDirectories).ToList();
-            AddFileNamesToList(FilesWithFullPath);
-        }*/
 // ---------------- test stub --------------------
 #if(test_directorysearcher)
         static void Main(string[] args)

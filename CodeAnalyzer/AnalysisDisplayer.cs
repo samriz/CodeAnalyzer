@@ -162,7 +162,6 @@ namespace CodeAnalyzer
             analysisXML.AppendChild(rootNode);
             analysisXML.Save(XML_Name);
         }
-
         private void CreateXMLDocumentUsingXmlWriter()
         {
             /*XmlWriterSettings settings = new XmlWriterSettings();
@@ -187,6 +186,7 @@ namespace CodeAnalyzer
                     writer.Flush();
                 }*/
         }
+// ---------------- test stub --------------------
 #if (test_analysisdisplayer)
         static void Main(string[] args)
         {

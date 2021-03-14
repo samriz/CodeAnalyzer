@@ -1,13 +1,13 @@
-﻿/////////////////////////////////////////////////////////////////////////////
-// ClassRelationshipFinder.cs - Determine all of the type relationships    //
-// in the package.                                                         //
-// ver 1.0                                                                 //
-// Language:    C#, 2020, .Net Framework 4.7.2                             //
-// Platform:    MSI GS65 Stealth, Win10                                    //
-// Application: CSE681, Project #2, Winter 2021                            //
-// Author:      Sameer Rizvi, Syracuse University                          //
-//              srizvi@syr.edu                                             //
-/////////////////////////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////////////////////////////
+// ClassNameFinder.cs - Finds all of the user-defined class names in a file    //
+// in the package.                                                             //
+// ver 1.0                                                                     //
+// Language:    C#, 2020, .Net Framework 4.7.2                                 //
+// Platform:    MSI GS65 Stealth, Win10                                        //
+// Application: CSE681, Project #2, Winter 2021                                //
+// Author:      Sameer Rizvi, Syracuse University                              //
+//              srizvi@syr.edu                                                 //
+/////////////////////////////////////////////////////////////////////////////////
 /*
  * Package Operations:
  * -------------------
@@ -78,6 +78,7 @@ namespace CodeAnalyzer
             }
             return false;
         }
+// ---------------- test stub --------------------
 #if (test_classrelationshipfinder)
         static void Main(string[] args)
         {

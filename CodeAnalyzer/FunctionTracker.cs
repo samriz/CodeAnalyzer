@@ -270,6 +270,8 @@ namespace CodeAnalyzer
         public void SetNamespaceName(string namespaceName) => this.namespaceName = namespaceName;
         public string GetClassName() => className;
         public string GetNamespaceName() => namespaceName;
+
+// ---------------- test stub --------------------
 #if (test_functiontracker)
         static void Main(string[] args)
         {

@@ -1,4 +1,32 @@
-﻿using System;
+﻿/////////////////////////////////////////////////////////////////////////////
+// FunctionNode.cs - class for building nodes that contain information     //
+// about functions.                                                        //
+// in the package.                                                         //
+// ver 1.0                                                                 //
+// Language:    C#, 2020, .Net Framework 4.7.2                             //
+// Platform:    MSI GS65 Stealth, Win10                                    //
+// Application: CSE681, Project #2, Winter 2021                            //
+// Author:      Sameer Rizvi, Syracuse University                          //
+//              srizvi@syr.edu                                             //
+/////////////////////////////////////////////////////////////////////////////
+/*
+ * Package Operations:
+ * -------------------
+ *  
+ */
+/* Required Files:
+ *   
+ *   
+ * Build command:
+ *   csc 
+ *   
+ * Maintenance History:
+ * --------------------
+ * ver 1.2 : 22 January 2021
+ * - first release
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,5 +82,13 @@ namespace CodeAnalyzer
         public void SetFunctionName(string functionName) => this.functionName = functionName;
         public void SetNumberOfScopes(int numberOfScopes) => this.numberOfScopes = numberOfScopes;
         public void SetNumberOfLines(int numberOfLines) => this.numberOfLines = numberOfLines;
+
+// ---------------- test stub --------------------
+#if (test_functionnode)
+        static void Main(string[] args)
+        {
+
+        }
+#endif
     }
 }

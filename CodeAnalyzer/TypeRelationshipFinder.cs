@@ -1,4 +1,30 @@
-﻿using System;
+﻿/////////////////////////////////////////////////////////////////////////////
+// TypeRelationshipFinder.cs - Finds all of the type relationships         //
+// in the package.                                                         //
+// ver 1.0                                                                 //
+// Language:    C#, 2020, .Net Framework 4.7.2                             //
+// Platform:    MSI GS65 Stealth, Win10                                    //
+// Application: CSE681, Project #2, Winter 2021                            //
+// Author:      Sameer Rizvi, Syracuse University                          //
+//              srizvi@syr.edu                                             //
+/////////////////////////////////////////////////////////////////////////////
+/*
+ * Package Operations:
+ * -------------------
+ *  
+ */
+/* Required Files:
+ *   
+ *   
+ * Build command:
+ *   csc 
+ *   
+ * Maintenance History:
+ * --------------------
+ * ver 1.2 : 22 January 2021
+ * - first release
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,5 +81,12 @@ namespace CodeAnalyzer
             //return relationshipList;
             return FindRelationships().Distinct();
         }
+// ---------------- test stub --------------------
+#if (test_typerelationshipfinder)
+        static void Main(string[] args)
+        {
+
+        }
+#endif
     }
 }

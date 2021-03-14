@@ -1,5 +1,5 @@
 ﻿/////////////////////////////////////////////////////////////////////
-// FileExtractor.cs - Read and save all data from C# file          //
+// FileExtractor.cs - Read and save all data from C# file.         //
 // ver 1.0                                                         //
 // Language:    C#, 2020, .Net Framework 4.7.2                     //
 // Platform:    MSI GS65 Stealth, Win10                            //
