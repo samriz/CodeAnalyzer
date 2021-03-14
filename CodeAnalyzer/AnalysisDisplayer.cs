@@ -41,13 +41,13 @@ namespace CodeAnalyzer
         {
 
         }
-        public AnalysisDisplayer(string XML_Name, List<FunctionNode> functionNodes) : this(XML_Name)
+        public AnalysisDisplayer(string fileName, List<FunctionNode> functionNodes) : this(fileName)
         {
             this.functionNodes = functionNodes;
         }
-        public AnalysisDisplayer(string XML_Name)
+        public AnalysisDisplayer(string fileName)
         {
-            this.XML_Name = XML_Name + "_analysis.xml";
+            this.XML_Name = fileName + "_analysis.xml";
         }
         public string GetXMLName()
         {
@@ -75,10 +75,13 @@ namespace CodeAnalyzer
                 CreateXMLDocument();     
             }
         }
-        public void DisplayRelationshipsToConsole()
+        public void DisplayRelationshipsToConsole(List<string> relationships)
         {
-
-
+            Console.WriteLine("Type Relationships:");
+            foreach(var relationship in relationships)
+            {
+                Console.WriteLine(relationship);
+            }
         }
         public void DisplayRelationshipsToXML()
         {

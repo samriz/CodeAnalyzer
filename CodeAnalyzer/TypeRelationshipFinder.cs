@@ -28,7 +28,7 @@ namespace CodeAnalyzer
             this.fileLines = fileLines;
             //relationships = new List<string>();
         }
-        public IEnumerable<string> FindRelationships()
+        public IEnumerable<string> FindRelationships(string thisclass)
         {
             IEnumerable<string> relationships = new List<string>();
             foreach (var line in fileLines)
@@ -37,7 +37,7 @@ namespace CodeAnalyzer
                 {
                     if (line.Contains(className))
                     {
-                        string relationshipString = "This file and/or class uses " + className + ".";
+                        string relationshipString = "Class " + thisclass + " uses " + className + ".";
                         relationships = relationships.Append(relationshipString);
                         Console.WriteLine("This file and/or class uses {0}.", className);
                     }
@@ -47,7 +47,7 @@ namespace CodeAnalyzer
         }
         public List<string> GetRelationships()
         {            
-            List<string> relationshipList = FindRelationships().Distinct().ToList();
+            List<string> relationshipList = FindRelationships("hi").Distinct().ToList();
             return relationshipList;
         }
     }

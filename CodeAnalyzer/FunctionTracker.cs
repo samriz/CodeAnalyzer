@@ -266,6 +266,7 @@ namespace CodeAnalyzer
         {
             return functionNodes;
         }
+
 #if (test_functiontracker)
         static void Main(string[] args)
         {

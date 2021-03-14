@@ -100,7 +100,7 @@ namespace CodeAnalyzerDLLClient
                 //CollectClassNames(CNF);
                 TRF = new TypeRelationshipFinder(classNames, FE.GetExtractedLines());
                 AD = new AnalysisDisplayer(file, FT.GetFunctionNodes());
-                DisplayBasedOnCommandLineArguments(args, AD, FE);
+                DisplayBasedOnCommandLineArguments(args, AD, FE, TRF);
             }
         }
         private static void CollectFunctionNodes(ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT)
@@ -162,7 +162,6 @@ namespace CodeAnalyzerDLLClient
                     return false;
                 }
                 //if the first argument is a valid path then make sure the other command-line arguments are the allowed ones: /S, /X, /R
-                //for (int i = 1; i < args.Length; i++)
                 {
                     if (!args.Contains("/S") && !args.Contains("/X") && !args.Contains("/R"))
                     {
@@ -175,7 +174,6 @@ namespace CodeAnalyzerDLLClient
                     }
                 }
             }
-            //return false;
         }
         private static void SetFilesBasedOnCommandLineArguments(string[] args, DirectorySearcher DS)
         {
@@ -223,7 +221,7 @@ namespace CodeAnalyzerDLLClient
                 }
             }
         }
-        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD, FileExtractor FE)
+        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD, FileExtractor FE, TypeRelationshipFinder TRF)
         {
             if(args.Length == 1)
             {
@@ -239,7 +237,7 @@ namespace CodeAnalyzerDLLClient
                 else if (args.Contains("/R"))
                 {
                     //display relationships between all types defined in file set, e.g., inheritance, composition, aggregation, and using relationships instead of the function sizes and complexities
-                    AD.DisplayRelationshipsToConsole();
+                    AD.DisplayRelationshipsToConsole(TRF.GetRelationships());
                 }
                 else
                 {
@@ -252,7 +250,9 @@ namespace CodeAnalyzerDLLClient
                     //if (!args.Contains("/X") && args.Contains("/S") || !args.Contains("/X") && args.Contains("/S") && args.Contains("/R"))
                     //if (args[i] != "/X" && args[i] == "/S" || args[i] != "/X" && args[i] == "/S" && args[i] == "/R")
                 {
-                    AD.DisplayAnalysisToStandardOutput();
+
+                    //AD.DisplayAnalysisToStandardOutput();
+                    AD.DisplayRelationshipsToConsole(TRF.GetRelationships());
                 }
                 else
                 {
