@@ -1,12 +1,5 @@
-CodeAnalyzer -> CodeAnalyzer\bin\Debug\CodeAnalyzer.dll
+::devenv "\CodeAnalyzer.sln" /deploy
 
-::CodeAnalyzer -> CodeAnalyzer\bin\Debug\CodeAnalyzer.pdb
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv" CodeAnalyzer.sln /rebuild debug
 
-::CodeAnalyzerDLLClient -> CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzer.dll
-
-::CodeAnalyzerDLLClient -> CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzer.pdb
-
-CodeAnalyzerDLLClient -> CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzerConsoleApp.exe
-
-::CodeAnalyzerDLLClient -> CodeAnalyzerConsoleApp\bin\Debug\CodeAnalyzerConsoleApp.pdb
-
+cmd /k

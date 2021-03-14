@@ -1,43 +1,6 @@
 <Class>
   <ClassName>class CodeAnalyzerConsoleApp</ClassName>
-  <Function>
-    <FunctionName>static void Main(string[] args)</FunctionName>
-    <NumberOfScopes>3</NumberOfScopes>
-    <NumberOfLines>28</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>private static void SearchAndAnalyze(string[] args, FileExtractor FE, FunctionTracker FT, ClassNameFinder CNF, AnalysisDisplayer AD)</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>12</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>private static void CollectClassNames(ClassNameFinder CNF)</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>5</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>private static string GetPathFromCommandLine(string[] args)</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>4</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>private static void DisplayListOfFoundFiles(DirectorySearcher DS)</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>2</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public static bool VerifyCommandLineArguments(string[] args)</FunctionName>
-    <NumberOfScopes>7</NumberOfScopes>
-    <NumberOfLines>34</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>private static void SetFilesBasedOnCommandLineArguments(string[] args, DirectorySearcher DS)</FunctionName>
-    <NumberOfScopes>11</NumberOfScopes>
-    <NumberOfLines>44</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD, FileExtractor FE)</FunctionName>
-    <NumberOfScopes>8</NumberOfScopes>
-    <NumberOfLines>36</NumberOfLines>
-  </Function>
+  <TypeRelationships>
+    <Relationship>class CodeAnalyzerConsoleApp uses CodeAnalyzerConsoleApp.</Relationship>
+  </TypeRelationships>
 </Class>

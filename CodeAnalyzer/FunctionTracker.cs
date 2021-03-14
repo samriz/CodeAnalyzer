@@ -134,8 +134,10 @@ namespace CodeAnalyzer
                     functionStack.Push(adjustedLines[i]);
                     functionName = adjustedLines[i].Remove(adjustedLines[i].Length - 1, 1);
                     FN = new FunctionNode(functionName);
+
+                    //run through just the function to collect function info
                     CollectFunctionData(adjustedLines, i, ref FN, scopeCount, numberOfLines);
-                    scopeCount = 0;
+                    scopeCount = 0; //reset the scope count for next function
                 }
             }
         }
