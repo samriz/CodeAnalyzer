@@ -99,7 +99,7 @@ namespace CodeAnalyzer
 #if(test_directorysearcher)
         static void Main(string[] args)
         {
-            DirectorySearcher DS = new DirectorySearcher(@"C:\Users\srizv\OneDrive - Syracuse University\Syracuse University\Courses\CSE 681 (2)\Project 2\CodeAnalyzer");
+            DirectorySearcher DS = new DirectorySearcher(@"..\..\..\CodeAnalyzer");
             foreach(var filename in DS.GetFileNames())
             {
                 Console.WriteLine(filename);

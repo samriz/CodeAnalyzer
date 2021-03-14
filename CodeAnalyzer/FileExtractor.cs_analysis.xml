@@ -2,5 +2,6 @@
   <ClassName>public class FileExtractor</ClassName>
   <TypeRelationships>
     <Relationship>public class FileExtractor uses FileExtractor.</Relationship>
+    <Relationship>public class FileExtractor uses DirectorySearcher.</Relationship>
   </TypeRelationships>
 </Class>

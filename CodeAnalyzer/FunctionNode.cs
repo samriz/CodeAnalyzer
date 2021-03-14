@@ -87,7 +87,7 @@ namespace CodeAnalyzer
 #if (test_functionnode)
         static void Main(string[] args)
         {
-
+            Console.ReadKey();
         }
 #endif
     }

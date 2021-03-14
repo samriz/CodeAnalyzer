@@ -82,17 +82,17 @@ namespace CodeAnalyzer
         public FunctionTracker()
         {
             ExtractedLines = new List<string>();
-            functionNodes = new List<FunctionNode>();
-            
+            functionNodes = new List<FunctionNode>();            
             functionStack = new Stack();
             className = "";
-            namespaceName = "";
+            namespaceName = "";   
         }
         public FunctionTracker(List<string> ExtractedLines) : this()
         {
             this.ExtractedLines = ExtractedLines;
+            DetectFunctionsAndScopes();
         }
-        public void DetectFunctionsAndScopes()
+        private void DetectFunctionsAndScopes()
         {
             int scopeCount = 0;
             int numberOfLines = 0;
@@ -275,7 +275,19 @@ namespace CodeAnalyzer
 #if (test_functiontracker)
         static void Main(string[] args)
         {
-
+            DirectorySearcher DS = new DirectorySearcher(@"..\..\..\CodeAnalyzer");
+            FileExtractor FE;
+            FunctionTracker FT = new FunctionTracker();
+            foreach (string file in DS.GetFilesWithFullPath())
+            {
+                FE = new FileExtractor(file);
+                FT = new FunctionTracker(FE.GetExtractedLines());
+            }
+            foreach(var node in FT.GetFunctionNodes())
+            {
+                Console.WriteLine(node.GetFunctionName());
+            }
+            Console.ReadKey();
         }
 #endif
     }

@@ -48,7 +48,6 @@ namespace CodeAnalyzerDLLClient
             classNames = new List<string>();
             functionNodes = new List<FunctionNode>();
         }
-
 #if(test_codeanalyzerconsoleapp)
         static void Main(string[] args)
         {
@@ -94,11 +93,10 @@ namespace CodeAnalyzerDLLClient
             {
                 FE = new FileExtractor(file);   
                 FT = new FunctionTracker(FE.GetExtractedLines());
-                FT.DetectFunctionsAndScopes();
+                //FT.DetectFunctionsAndScopes();
                 //functionNodes.AddRange(FT.GetFunctionNodes());
                 //CNF = new ClassNameFinder();
-                //CollectClassNames(CNF);
-                
+                //CollectClassNames(CNF);               
                 TRF = new TypeRelationshipFinder(FT.GetClassName(), classNames, FE.GetExtractedLines());
                 AD = new AnalysisDisplayer(FE, FT, TRF);
                 DisplayBasedOnCommandLineArguments(args, AD, FE, TRF);
@@ -110,7 +108,6 @@ namespace CodeAnalyzerDLLClient
             {
                 FE = new FileExtractor(file);
                 FT = new FunctionTracker(FE.GetExtractedLines());
-                FT.DetectFunctionsAndScopes();
                 functionNodes.AddRange(FT.GetFunctionNodes());
             }
         }

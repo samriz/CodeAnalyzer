@@ -1,4 +1,11 @@
 <Class>
   <ClassName>public class TypeRelationshipFinder</ClassName>
-  <TypeRelationships />
+  <TypeRelationships>
+    <Relationship>public class TypeRelationshipFinder uses TypeRelationshipFinder.</Relationship>
+    <Relationship>public class TypeRelationshipFinder uses DirectorySearcher.</Relationship>
+    <Relationship>public class TypeRelationshipFinder uses FileExtractor.</Relationship>
+    <Relationship>public class TypeRelationshipFinder uses FunctionTracker.</Relationship>
+    <Relationship>public class TypeRelationshipFinder uses ClassNameFinder.</Relationship>
+    <Relationship>public class TypeRelationshipFinder uses FunctionNode.</Relationship>
+  </TypeRelationships>
 </Class>

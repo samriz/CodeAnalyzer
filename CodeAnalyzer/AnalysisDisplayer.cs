@@ -190,7 +190,22 @@ namespace CodeAnalyzer
 #if (test_analysisdisplayer)
         static void Main(string[] args)
         {
-
+            DirectorySearcher DS = new DirectorySearcher(@"..\..\..\CodeAnalyzer");
+            FileExtractor FE;
+            FunctionTracker FT;
+            TypeRelationshipFinder TRF;
+            ClassNameFinder CNF;
+            AnalysisDisplayer AD;
+            foreach (string file in DS.GetFilesWithFullPath())
+            {
+                FE = new FileExtractor(file);
+                FT = new FunctionTracker(FE.GetExtractedLines());
+                CNF = new ClassNameFinder(FT.GetFunctionNodes());
+                TRF = new TypeRelationshipFinder(FT.GetClassName(), CNF.GetAllClassNames(), FE.GetExtractedLines());
+                AD = new AnalysisDisplayer(FE, FT, TRF);
+                AD.DisplayAnalysisToStandardOutput();
+            }
+            Console.ReadKey();
         }
 #endif
     }

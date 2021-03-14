@@ -81,11 +81,36 @@ namespace CodeAnalyzer
             //return relationshipList;
             return FindRelationships().Distinct();
         }
-// ---------------- test stub --------------------
+        // ---------------- test stub --------------------
 #if (test_typerelationshipfinder)
         static void Main(string[] args)
         {
-
+            DirectorySearcher DS = new DirectorySearcher(@"..\..\..\CodeAnalyzer");
+            FileExtractor FE;
+            FunctionTracker FT;
+            TypeRelationshipFinder TRF = new TypeRelationshipFinder();
+            ClassNameFinder CNF;
+            //IEnumerable<string> classNames = new List<string>();
+            /*foreach (string file in DS.GetFilesWithFullPath())
+            {
+                foreach (var className in CNF.GetAllClassNames(functionNodes))
+                {
+                    classNames = classNames.Append(className);
+                }
+            }*/
+            foreach (string file in DS.GetFilesWithFullPath())
+            {
+                FE = new FileExtractor(file);
+                FT = new FunctionTracker(FE.GetExtractedLines());
+                CNF = new ClassNameFinder(FT.GetFunctionNodes());
+                /*foreach (var className in CNF.GetAllClassNames())
+                {
+                    classNames = classNames.Append(className);
+                }
+                TRF = new TypeRelationshipFinder(FT.GetClassName(), classNames, FE.GetExtractedLines());*/
+                TRF = new TypeRelationshipFinder(FT.GetClassName(), CNF.GetAllClassNames(), FE.GetExtractedLines());
+            }
+            Console.ReadKey();
         }
 #endif
     }

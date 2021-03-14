@@ -93,7 +93,17 @@ namespace CodeAnalyzer
 #if (test_fileextractor)
         static void Main(string[] args)
         {
-
+            DirectorySearcher DS = new DirectorySearcher(@"..\..\..\CodeAnalyzer");
+            FileExtractor FE = new FileExtractor();
+            foreach (var file in DS.GetFilesWithFullPath())
+            {
+                FE = new FileExtractor(file);
+                foreach(var line in FE.GetExtractedLines())
+                {
+                    Console.WriteLine(line);
+                }
+            }
+            Console.ReadKey();
         }
 #endif
     }

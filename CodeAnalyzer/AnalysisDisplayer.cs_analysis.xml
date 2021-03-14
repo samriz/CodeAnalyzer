@@ -5,5 +5,8 @@
     <Relationship>public class AnalysisDisplayer uses FunctionNode.</Relationship>
     <Relationship>public class AnalysisDisplayer uses FileExtractor.</Relationship>
     <Relationship>public class AnalysisDisplayer uses FunctionTracker.</Relationship>
+    <Relationship>public class AnalysisDisplayer uses TypeRelationshipFinder.</Relationship>
+    <Relationship>public class AnalysisDisplayer uses DirectorySearcher.</Relationship>
+    <Relationship>public class AnalysisDisplayer uses ClassNameFinder.</Relationship>
   </TypeRelationships>
 </Class>

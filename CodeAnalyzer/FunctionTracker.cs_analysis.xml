@@ -3,5 +3,7 @@
   <TypeRelationships>
     <Relationship>public class FunctionTracker uses FunctionTracker.</Relationship>
     <Relationship>public class FunctionTracker uses FunctionNode.</Relationship>
+    <Relationship>public class FunctionTracker uses DirectorySearcher.</Relationship>
+    <Relationship>public class FunctionTracker uses FileExtractor.</Relationship>
   </TypeRelationships>
 </Class>

@@ -38,13 +38,37 @@ namespace CodeAnalyzer
     public class ClassNameFinder
     {
         private static readonly string inheritancePattern;
+        private List<FunctionNode> functionNodes;
         static ClassNameFinder()
         {
             inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";           
         }
         public ClassNameFinder()
         {
-            
+            functionNodes = new List<FunctionNode>();
+        }
+        public ClassNameFinder(List<FunctionNode> functionNodes)
+        {
+            this.functionNodes = functionNodes;
+        }
+        public List<string> GetAllClassNames()
+        {
+            List<string> classNames = new List<string>();
+
+            foreach (var node in functionNodes)
+            {
+                classNames.Add(node.GetClassName());
+            }
+            IEnumerable<string> distinctClassNames = classNames.Distinct();
+            List<string> distinctClassNamesList = new List<string>();
+
+            for (int i = 0; i < distinctClassNames.ToList().Count; i++)
+            {
+                string[] s = distinctClassNames.ElementAt(i).ToString().Split(' ');
+                string justclassname = (string)s.GetValue(s.Length - 1);
+                distinctClassNamesList.Add(justclassname);
+            }
+            return distinctClassNamesList;
         }
         public List<string> GetAllClassNames(List<FunctionNode> functionNodes)
         {
@@ -79,10 +103,24 @@ namespace CodeAnalyzer
             return false;
         }
 // ---------------- test stub --------------------
-#if (test_classrelationshipfinder)
+#if (test_classnamefinder)
         static void Main(string[] args)
         {
-
+            DirectorySearcher DS = new DirectorySearcher(@"..\..\..\CodeAnalyzer");
+            FileExtractor FE;
+            FunctionTracker FT;
+            ClassNameFinder CNF = new ClassNameFinder();
+            foreach (string file in DS.GetFilesWithFullPath())
+            {
+                FE = new FileExtractor(file);
+                FT = new FunctionTracker(FE.GetExtractedLines());
+                CNF = new ClassNameFinder(FT.GetFunctionNodes());
+            }
+            foreach(var className in CNF.GetAllClassNames())
+            {
+                Console.WriteLine(className);
+            }
+            Console.ReadKey();
         }
 #endif
     }

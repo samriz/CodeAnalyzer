@@ -23,5 +23,12 @@ namespace CodeAnalyzer
         public void SetExplanation(string explanation) => this.explanation = explanation;
         public string GetClassName() => className;
         public string GetExplanation() => explanation;
+// ---------------- test stub --------------------
+#if (test_typerelationshipnode)
+        static void Main(string[] args)
+        {
+            Console.ReadKey();
+        }
+#endif
     }
 }
