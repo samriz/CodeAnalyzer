@@ -31,8 +31,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-/*1.You need to do two passes. In the first pass, you need to find all type names including classes, structs and interfaces. In the second pass, you will search these names in every line. Depending on the scope of the line where you found the name, you will establish a relationship. For example, say you have a type name A in your list that you found after the first pass, and during the second pass you encountered A in a function in class B. Then you will say B uses A.*/
-
 namespace CodeAnalyzer
 {
     public class ClassNameFinder

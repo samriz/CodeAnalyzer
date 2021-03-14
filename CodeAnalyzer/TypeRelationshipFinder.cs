@@ -69,7 +69,7 @@ namespace CodeAnalyzer
                     {
                         string relationshipString = className + " uses " + name + ".";
                         relationships = relationships.Append(relationshipString);
-                        Console.WriteLine(relationshipString);
+                        //Console.WriteLine(relationshipString);
                     }
                 }
             }

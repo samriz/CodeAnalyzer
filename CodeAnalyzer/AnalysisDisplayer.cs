@@ -87,17 +87,21 @@ namespace CodeAnalyzer
         }
         public void DisplayRelationshipsToConsole()
         {
+            Console.WriteLine("Type relationships for {0}:", FT.GetClassName());
             foreach (var relationship in TRF.GetRelationships())
             {
-                Console.WriteLine(relationship);
+                Console.WriteLine(" {0}", relationship);
             }
+            Console.WriteLine("");
         }
         public void DisplayRelationshipsToConsole(IEnumerable<string> relationships)
         {
-            foreach(var relationship in relationships)
+            Console.WriteLine("Type relationships for {0}:", FT.GetClassName());
+            foreach (var relationship in relationships)
             {
-                Console.WriteLine(relationship);
+                Console.WriteLine(" {0}", relationship);
             }
+            Console.WriteLine("");
         }
         public void DisplayRelationshipsToXML()
         {

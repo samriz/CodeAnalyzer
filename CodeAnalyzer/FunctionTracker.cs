@@ -11,10 +11,15 @@
 /*
  * Package Operations:
  * -------------------
+ *  Use Regex and Match classes to search for patterns that match
+ *  namespaces, class, functions, loops, and statements which can contain
+ *  braces.
+ *  
+ *  Build list of function nodes. Each function node pertains to a function.
  *  
  */
 /* Required Files:
- *   
+ *   FunctionNode.cs
  *   
  * Build command:
  *   csc 
@@ -45,14 +50,12 @@ namespace CodeAnalyzer
         private Match endBraceMatch;
         private Match doWhileMatch;
         private Match elseMatch;
-        //int scopeCount;
-        //int numberOfLines;
         Stack functionStack;
         private string className;
         private string namespaceName;
 
         readonly List<string> ExtractedLines;
-        readonly private List<FunctionNode> functionNodes;
+        private List<FunctionNode> functionNodes;
 
         //regular expression patterns:
         private static readonly string namespacePattern;
@@ -65,6 +68,7 @@ namespace CodeAnalyzer
         //private static readonly string endScopePattern;
         private static readonly string endBracePattern;
 
+        //static contructor below
         static FunctionTracker()
         {
             namespacePattern = @"(namespace)\s+\w+\s*\{";
@@ -79,6 +83,8 @@ namespace CodeAnalyzer
             //endScopePattern = @"\){";
             endBracePattern = @"\}";    
         }
+
+        //default constructor
         public FunctionTracker()
         {
             ExtractedLines = new List<string>();
@@ -136,14 +142,14 @@ namespace CodeAnalyzer
                     FN = new FunctionNode(functionName);
 
                     //run through just the function to collect function info
-                    CollectFunctionData(adjustedLines, i, ref FN, scopeCount, numberOfLines);
+                    CollectFunctionData(adjustedLines, ref i, ref FN, ref scopeCount, ref numberOfLines);
                     scopeCount = 0; //reset the scope count for next function
                 }
             }
         }
 
         //gather information about function
-        private void CollectFunctionData(List<string> functionLines, int functionPosition, ref FunctionNode FN, int scopeCount, int numberOfLines)
+        private void CollectFunctionData(List<string> functionLines, ref int functionPosition, ref FunctionNode FN, ref int scopeCount, ref int numberOfLines)
         {
             for (int j = functionPosition + 1; j < functionLines.Count; j++) //traverse the function only
             {
@@ -175,6 +181,7 @@ namespace CodeAnalyzer
                 }
                 if (functionStack.Count < 1)
                 {
+                    --numberOfLines;
                     --scopeCount; //decrease scopeCount by 1 so we don't take into account the curly brackets of the function itself
                     FN.SetClassName(className);
                     FN.SetNamespaceName(namespaceName);
@@ -192,10 +199,13 @@ namespace CodeAnalyzer
         {
             for (int i = 0; i < lines.Count; i++)
             {
+                //skip empty lines
                 if (lines[i].Length == 0)
                 {
                     continue;
                 }
+
+                //trim off blank spaces
                 else
                 {
                     lines[i] = lines[i].Trim();
@@ -220,7 +230,7 @@ namespace CodeAnalyzer
         }
 
         //find comments using Regex and Match class
-        private List<string> FindComments(List<string> lines)
+        /*private List<string> FindComments(List<string> lines)
         {
             Match singleLineCommentMatch;
             Match multiLineCommentMatch1;
@@ -231,10 +241,10 @@ namespace CodeAnalyzer
                 multiLineCommentMatch1 = Regex.Match(lines[i], @"\/\*\s*");
             }
             return lines;
-        }
+        }*/
 
         //remove lines that begin with "using"
-        private void RemoveUsings(List<string> lines)
+        /*private void RemoveUsings(List<string> lines)
         {
             Match usingMatch;
             for (int i = 0; i < lines.Count; i++)
@@ -245,7 +255,7 @@ namespace CodeAnalyzer
                     lines.RemoveAt(i);
                 }
             }
-        }
+        }*/
 
         //find index in list where namespace is declared
         private int FindPositionOfNamespace(List<string> list)
@@ -256,6 +266,7 @@ namespace CodeAnalyzer
             {
                 namespaceMatch = Regex.Match(list[i], @"namespace\s+");
 
+                //if namespace is a match in the list, then save the index of where it is in the list
                 if (namespaceMatch.Success)
                 {
                     positionOfNamespace = i;
@@ -264,16 +275,13 @@ namespace CodeAnalyzer
             }
             return positionOfNamespace;
         }
-        public List<FunctionNode> GetFunctionNodes()
-        {
-            return functionNodes;
-        }
         public void SetClassName(string className) => this.className = className;
         public void SetNamespaceName(string namespaceName) => this.namespaceName = namespaceName;
         public string GetClassName() => className;
         public string GetNamespaceName() => namespaceName;
+        public List<FunctionNode> GetFunctionNodes() => functionNodes;
 
-// ---------------- test stub --------------------
+        // ---------------- test stub --------------------
 #if (test_functiontracker)
         static void Main(string[] args)
         {

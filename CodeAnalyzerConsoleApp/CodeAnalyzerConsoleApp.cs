@@ -76,13 +76,7 @@ namespace CodeAnalyzerDLLClient
                 CollectClassNames(ref CNF, ref DS);
                
                 SearchAndAnalyze(args, ref DS, ref FE, ref FT, ref AD, ref TRF);
-                classNames = classNames.Distinct();
-                classNames = classNames.ToList();
-                
-                /*foreach (var className in classNames)
-                {
-                    Console.WriteLine(className);
-                }*/
+                classNames = classNames.Distinct().ToList();
             }
             Console.ReadKey();
         }
@@ -242,13 +236,11 @@ namespace CodeAnalyzerDLLClient
                     AD.DisplayAnalysisToStandardOutput();
                 }
             }
-            else if(args.Length == 3 || args.Length == 4)
+            else if(args.Length == 3)
             {
                 if(!args.Contains("/X"))
-                    //if (!args.Contains("/X") && args.Contains("/S") || !args.Contains("/X") && args.Contains("/S") && args.Contains("/R"))
-                    //if (args[i] != "/X" && args[i] == "/S" || args[i] != "/X" && args[i] == "/S" && args[i] == "/R")
                 {
-                    //AD.DisplayAnalysisToStandardOutput();
+                    
                     AD.DisplayRelationshipsToConsole();
                 }
                 else
@@ -262,6 +254,10 @@ namespace CodeAnalyzerDLLClient
                         AD.DisplayAnalysisToXML();
                     }
                 }
+            }
+            else if(args.Length == 4)
+            {
+                AD.DisplayRelationshipsToXML();
             }
         }
     } 
