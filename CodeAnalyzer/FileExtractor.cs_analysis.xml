@@ -1,33 +1,6 @@
 <Class>
   <ClassName>public class FileExtractor</ClassName>
-  <Function>
-    <FunctionName>public string GetFile() =&gt; file</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>3</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void SetExtractedLines(string file) =&gt; AllExtractedLines = File.ReadAllLines(file).ToList&lt;string&gt;()</FunctionName>
-    <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>17</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void SetFile(string file) =&gt; this.file = file</FunctionName>
-    <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>16</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>private int FindPositionOfNamespace(List&lt;string&gt; list)</FunctionName>
-    <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>15</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>/*public int CountStatements(List&lt;string&gt; lines)</FunctionName>
-    <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>10</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>static void Main(string[] args)</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>2</NumberOfLines>
-  </Function>
+  <TypeRelationships>
+    <Relationship>public class FileExtractor uses FileExtractor.</Relationship>
+  </TypeRelationships>
 </Class>

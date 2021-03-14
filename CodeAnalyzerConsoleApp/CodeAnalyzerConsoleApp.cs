@@ -98,8 +98,9 @@ namespace CodeAnalyzerDLLClient
                 //functionNodes.AddRange(FT.GetFunctionNodes());
                 //CNF = new ClassNameFinder();
                 //CollectClassNames(CNF);
-                TRF = new TypeRelationshipFinder(classNames, FE.GetExtractedLines());
-                AD = new AnalysisDisplayer(file, FT.GetFunctionNodes());
+                
+                TRF = new TypeRelationshipFinder(FT.GetClassName(), classNames, FE.GetExtractedLines());
+                AD = new AnalysisDisplayer(FE, FT, TRF);
                 DisplayBasedOnCommandLineArguments(args, AD, FE, TRF);
             }
         }
@@ -237,7 +238,7 @@ namespace CodeAnalyzerDLLClient
                 else if (args.Contains("/R"))
                 {
                     //display relationships between all types defined in file set, e.g., inheritance, composition, aggregation, and using relationships instead of the function sizes and complexities
-                    AD.DisplayRelationshipsToConsole(TRF.GetRelationships());
+                    AD.DisplayRelationshipsToConsole();
                 }
                 else
                 {
@@ -250,14 +251,19 @@ namespace CodeAnalyzerDLLClient
                     //if (!args.Contains("/X") && args.Contains("/S") || !args.Contains("/X") && args.Contains("/S") && args.Contains("/R"))
                     //if (args[i] != "/X" && args[i] == "/S" || args[i] != "/X" && args[i] == "/S" && args[i] == "/R")
                 {
-
                     //AD.DisplayAnalysisToStandardOutput();
-                    AD.DisplayRelationshipsToConsole(TRF.GetRelationships());
+                    AD.DisplayRelationshipsToConsole();
                 }
                 else
                 {
-
-                    AD.DisplayAnalysisToXML();
+                    if (args.Contains("/R"))
+                    {
+                        AD.DisplayRelationshipsToXML();
+                    }
+                    else 
+                    { 
+                        AD.DisplayAnalysisToXML();
+                    }
                 }
             }
         }

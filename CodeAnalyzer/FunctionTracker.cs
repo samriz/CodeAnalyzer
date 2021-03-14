@@ -48,8 +48,8 @@ namespace CodeAnalyzer
         //int scopeCount;
         //int numberOfLines;
         Stack functionStack;
-        string className;
-        string namespaceName;
+        private string className;
+        private string namespaceName;
 
         readonly List<string> ExtractedLines;
         readonly private List<FunctionNode> functionNodes;
@@ -266,7 +266,10 @@ namespace CodeAnalyzer
         {
             return functionNodes;
         }
-
+        public void SetClassName(string className) => this.className = className;
+        public void SetNamespaceName(string namespaceName) => this.namespaceName = namespaceName;
+        public string GetClassName() => className;
+        public string GetNamespaceName() => namespaceName;
 #if (test_functiontracker)
         static void Main(string[] args)
         {

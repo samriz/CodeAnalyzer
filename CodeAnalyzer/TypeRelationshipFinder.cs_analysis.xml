@@ -1,8 +1,4 @@
 <Class>
   <ClassName>public class TypeRelationshipFinder</ClassName>
-  <Function>
-    <FunctionName>public void FindRelationships()</FunctionName>
-    <NumberOfScopes>3</NumberOfScopes>
-    <NumberOfLines>10</NumberOfLines>
-  </Function>
+  <TypeRelationships />
 </Class>

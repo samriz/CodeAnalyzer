@@ -1,38 +1,6 @@
 <Class>
   <ClassName>public class DirectorySearcher</ClassName>
-  <Function>
-    <FunctionName>public bool IsDirectoryPathTypeAString(string path)</FunctionName>
-    <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>10</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void SetDirectoryPath(string DirectoryPath) =&gt; this.DirectoryPath = DirectoryPath</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>5</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void SetFilesInDirectory(List&lt;string&gt; FilesWithFullPath)</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>4</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public string GetDirectoryPath()</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>2</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public string GetFilenameExtension()</FunctionName>
-    <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>2</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>public void AddFileNamesToList(List&lt;string&gt; Files)</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>6</NumberOfLines>
-  </Function>
-  <Function>
-    <FunctionName>static void Main(string[] args)</FunctionName>
-    <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>7</NumberOfLines>
-  </Function>
+  <TypeRelationships>
+    <Relationship>public class DirectorySearcher uses DirectorySearcher.</Relationship>
+  </TypeRelationships>
 </Class>

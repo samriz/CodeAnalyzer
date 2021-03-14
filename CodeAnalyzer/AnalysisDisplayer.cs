@@ -37,15 +37,26 @@ namespace CodeAnalyzer
     {
         private readonly string XML_Name;
         List<FunctionNode> functionNodes;
+        FileExtractor FE;
+        FunctionTracker FT;
+        TypeRelationshipFinder TRF;
         public AnalysisDisplayer()
         {
-
+            FE = null;
+            FT = null;
+        }
+        public AnalysisDisplayer(FileExtractor FE, FunctionTracker FT, TypeRelationshipFinder TRF) : this(FE.GetFile())
+        {
+            this.FE = FE;
+            this.FT = FT;
+            this.TRF = TRF;
+            functionNodes = FT.GetFunctionNodes();
         }
         public AnalysisDisplayer(string fileName, List<FunctionNode> functionNodes) : this(fileName)
         {
             this.functionNodes = functionNodes;
         }
-        public AnalysisDisplayer(string fileName)
+        public AnalysisDisplayer(string fileName): this()
         {
             this.XML_Name = fileName + "_analysis.xml";
         }
@@ -62,7 +73,6 @@ namespace CodeAnalyzer
                 Console.WriteLine("Function complexity: {0}", node.GetNumberOfScopes());
                 Console.WriteLine("Number of lines: {0}\n", node.GetNumberOfLines());
             }
-            //TRF.GetRelationships();
         }
         public void DisplayAnalysisToXML()
         { 
@@ -75,9 +85,15 @@ namespace CodeAnalyzer
                 CreateXMLDocument();     
             }
         }
-        public void DisplayRelationshipsToConsole(List<string> relationships)
+        public void DisplayRelationshipsToConsole()
         {
-            Console.WriteLine("Type Relationships:");
+            foreach (var relationship in TRF.GetRelationships())
+            {
+                Console.WriteLine(relationship);
+            }
+        }
+        public void DisplayRelationshipsToConsole(IEnumerable<string> relationships)
+        {
             foreach(var relationship in relationships)
             {
                 Console.WriteLine(relationship);
@@ -85,8 +101,30 @@ namespace CodeAnalyzer
         }
         public void DisplayRelationshipsToXML()
         {
+            XmlDocument analysisXML = new XmlDocument();
+            XmlElement rootElement = analysisXML.CreateElement("Class");
+            XmlNode rootNode = rootElement;
 
+            XmlElement classNameElement = analysisXML.CreateElement("ClassName");
+            classNameElement.InnerText = FT.GetClassName();
+            XmlNode classNameNode = classNameElement;
 
+            XmlElement typeRelationshipsElement = analysisXML.CreateElement("TypeRelationships");
+            XmlNode typeRelationshipsNode = typeRelationshipsElement;
+
+            rootNode.AppendChild(classNameNode);
+
+            foreach (var relationship in TRF.GetRelationships())
+            {
+                XmlElement relationshipElement = analysisXML.CreateElement("Relationship");
+                relationshipElement.InnerText = relationship;
+                XmlNode relationshipNode = relationshipElement;
+
+                typeRelationshipsNode.AppendChild(relationshipNode);
+            }
+            rootNode.AppendChild(typeRelationshipsNode);
+            analysisXML.AppendChild(rootNode);
+            analysisXML.Save(XML_Name);
         }
         private void CreateXMLDocument()
         {
@@ -97,18 +135,9 @@ namespace CodeAnalyzer
             XmlElement classNameElement = analysisXML.CreateElement("ClassName");
             classNameElement.InnerText = functionNodes[0].GetClassName();
             XmlNode classNameNode = classNameElement;
-            rootNode.AppendChild(classNameNode);
+            rootNode.AppendChild(classNameNode);         
 
-            /*XmlElement functionElement;
-            XmlNode functionNode;
-            XmlElement functionNameElement;
-            XmlNode functionNameNode;
-            XmlElement scopeElement;
-            XmlNode scopeNode;
-            XmlElement linesElement;
-            XmlNode linesNode;*/            
-
-            foreach (FunctionNode node in functionNodes)
+            foreach (var node in functionNodes)
             {
                 XmlElement functionElement = analysisXML.CreateElement("Function");
                 XmlNode functionNode = functionElement;

@@ -10,45 +10,50 @@ namespace CodeAnalyzer
     {
         private readonly List<string> classNames;
         private readonly List<string> fileLines;
+        private readonly string className;
         //private IEnumerable<string> relationships;
 
         public TypeRelationshipFinder()
         {
 
         }
-        public TypeRelationshipFinder(List<string> classNames, List<string> fileLines)
+        public TypeRelationshipFinder(string className, List<string> classNames, List<string> fileLines)
         {
+            this.className = className;
             this.classNames = classNames;
             this.fileLines = fileLines;
+
             //relationships = new List<string>();
         }
-        public TypeRelationshipFinder(IEnumerable<string> classNames, List<string> fileLines)
+        public TypeRelationshipFinder(string className, IEnumerable<string> classNames, List<string> fileLines)
         {
+            this.className = className;
             this.classNames = classNames.ToList();
             this.fileLines = fileLines;
             //relationships = new List<string>();
         }
-        public IEnumerable<string> FindRelationships(string thisclass)
+        public IEnumerable<string> FindRelationships()
         {
             IEnumerable<string> relationships = new List<string>();
             foreach (var line in fileLines)
             {
-                foreach(var className in classNames)
+                foreach(var name in classNames)
                 {
-                    if (line.Contains(className))
+                    if (line.Contains(name))
                     {
-                        string relationshipString = "Class " + thisclass + " uses " + className + ".";
+                        string relationshipString = className + " uses " + name + ".";
                         relationships = relationships.Append(relationshipString);
-                        Console.WriteLine("This file and/or class uses {0}.", className);
+                        Console.WriteLine(relationshipString);
                     }
                 }
             }
             return relationships;
         }
-        public List<string> GetRelationships()
-        {            
-            List<string> relationshipList = FindRelationships("hi").Distinct().ToList();
-            return relationshipList;
+        public IEnumerable<string> GetRelationships()
+        {
+            //List<string> relationshipList = FindRelationships().Distinct().ToList();
+            //return relationshipList;
+            return FindRelationships().Distinct();
         }
     }
 }

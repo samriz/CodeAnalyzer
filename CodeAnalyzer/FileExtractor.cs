@@ -44,7 +44,6 @@ namespace CodeAnalyzer
         {
 
         }
-
         public FileExtractor(string file)
         {
             this.file = file;
@@ -54,9 +53,6 @@ namespace CodeAnalyzer
             //AdjustScopes();
         }
         public string GetFile() => file;
-        /*{
-            return file;
-        }*/
         public List<string> GetExtractedLines()
         {
             return AllExtractedLines;
@@ -94,18 +90,6 @@ namespace CodeAnalyzer
             //return FindAndRemoveComments(File.ReadAllLines(file).ToList<string>());
             return File.ReadAllLines(file).ToList<string>();
         }
-        /*public int CountStatements(List<string> lines)
-        {
-            int statementCount = 0;
-            foreach(string line in lines)
-            {
-                if (line.EndsWith(";")) 
-                { 
-                    ++statementCount;
-                }
-            }
-            return statementCount;
-        }*/
 #if (test_fileextractor)
         static void Main(string[] args)
         {
