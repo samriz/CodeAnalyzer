@@ -54,48 +54,5 @@ namespace CodeAnalyzer
         public void SetFunctionName(string functionName) => this.functionName = functionName;
         public void SetNumberOfScopes(int numberOfScopes) => this.numberOfScopes = numberOfScopes;
         public void SetNumberOfLines(int numberOfLines) => this.numberOfLines = numberOfLines;
-        /*private string scopeHead;
-        private List<string> functionContents;
-        private List<ScopeNode> children;
-        private ScopeNode parent;
-        public ScopeNode()
-        {
-            parent = null;
-            this.scopeHead = "";
-            functionContents = null;
-            children = new List<ScopeNode>();
-        }
-        public ScopeNode(string scopeHead) : this()
-        {
-            this.scopeHead = scopeHead;
-        }
-        public ScopeNode(string scopeHead, List<string> functionContents)
-        {
-            this.scopeHead = scopeHead;
-            this.functionContents = functionContents;
-            children = new List<ScopeNode>();
-        }
-        public string GetScopeHead()
-        {
-            return scopeHead;
-        }
-        public void SetScopeHead(string scopeHead) => this.scopeHead = scopeHead;
-        public List<ScopeNode> GetChildren()
-        {
-            return children;
-        }
-        public void AddChild(ScopeNode sn) => children.Add(sn);
-        public ScopeNode GetParent()
-        {
-            return parent;
-        }
-        public void SetParent(ScopeNode parent) => this.parent = parent;
-        public void PrintChildren()
-        {
-            foreach(ScopeNode child in children)
-            {
-                Console.WriteLine(child.GetScopeHead());
-            }
-        }*/
     }
 }
