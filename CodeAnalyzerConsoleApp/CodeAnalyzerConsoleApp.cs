@@ -80,10 +80,10 @@ namespace CodeAnalyzerDLLClient
                 classNames = classNames.Distinct();
                 classNames = classNames.ToList();
                 
-                foreach (var className in classNames)
+                /*foreach (var className in classNames)
                 {
                     Console.WriteLine(className);
-                }
+                }*/
             }
             Console.ReadKey();
         }
@@ -100,7 +100,7 @@ namespace CodeAnalyzerDLLClient
                 //CollectClassNames(CNF);
                 TRF = new TypeRelationshipFinder(classNames, FE.GetExtractedLines());
                 AD = new AnalysisDisplayer(file, FT.GetFunctionNodes());
-                DisplayBasedOnCommandLineArguments(args, AD, FE, TRF);
+                DisplayBasedOnCommandLineArguments(args, AD, FE);
             }
         }
         private static void CollectFunctionNodes(ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT)
@@ -223,11 +223,11 @@ namespace CodeAnalyzerDLLClient
                 }
             }
         }
-        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD, FileExtractor FE, TypeRelationshipFinder TRF)
+        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD, FileExtractor FE)
         {
             if(args.Length == 1)
             {
-                AD.DisplayAnalysisToStandardOutput(TRF);
+                AD.DisplayAnalysisToStandardOutput();
             }
             else if (args.Length == 2)
             {
@@ -243,7 +243,7 @@ namespace CodeAnalyzerDLLClient
                 }
                 else
                 {
-                    AD.DisplayAnalysisToStandardOutput(TRF);
+                    AD.DisplayAnalysisToStandardOutput();
                 }
             }
             else if(args.Length == 3 || args.Length == 4)
@@ -252,7 +252,7 @@ namespace CodeAnalyzerDLLClient
                     //if (!args.Contains("/X") && args.Contains("/S") || !args.Contains("/X") && args.Contains("/S") && args.Contains("/R"))
                     //if (args[i] != "/X" && args[i] == "/S" || args[i] != "/X" && args[i] == "/S" && args[i] == "/R")
                 {
-                    AD.DisplayAnalysisToStandardOutput(TRF);
+                    AD.DisplayAnalysisToStandardOutput();
                 }
                 else
                 {

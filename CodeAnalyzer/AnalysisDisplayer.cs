@@ -35,10 +35,8 @@ namespace CodeAnalyzer
 {
     public class AnalysisDisplayer
     {
-        //private static readonly string XML_Name;
-        private string XML_Name;
+        private readonly string XML_Name;
         List<FunctionNode> functionNodes;
-        //private TypeRelationshipFinder TRF;
         public AnalysisDisplayer()
         {
 
@@ -55,7 +53,7 @@ namespace CodeAnalyzer
         {
             return XML_Name;
         }
-        public void DisplayAnalysisToStandardOutput(TypeRelationshipFinder TRF)
+        public void DisplayAnalysisToStandardOutput()
         {
             foreach (var node in functionNodes)
             {
@@ -64,7 +62,7 @@ namespace CodeAnalyzer
                 Console.WriteLine("Function complexity: {0}", node.GetNumberOfScopes());
                 Console.WriteLine("Number of lines: {0}\n", node.GetNumberOfLines());
             }
-            TRF.FindRelationships();
+            //TRF.GetRelationships();
         }
         public void DisplayAnalysisToXML()
         { 
@@ -77,7 +75,17 @@ namespace CodeAnalyzer
                 CreateXMLDocument();     
             }
         }
-        public void CreateXMLDocument()
+        public void DisplayRelationshipsToConsole()
+        {
+
+
+        }
+        public void DisplayRelationshipsToXML()
+        {
+
+
+        }
+        private void CreateXMLDocument()
         {
             XmlDocument analysisXML = new XmlDocument();
             XmlElement rootElement = analysisXML.CreateElement("Class");
@@ -146,17 +154,6 @@ namespace CodeAnalyzer
                     writer.WriteEndDocument();
                     writer.Flush();
                 }*/
-        }
-
-        public void DisplayRelationshipsToConsole()
-        {
-            
-
-        }
-        public void DisplayRelationshipsToXML()
-        {
-
-
         }
 #if (test_analysisdisplayer)
         static void Main(string[] args)
