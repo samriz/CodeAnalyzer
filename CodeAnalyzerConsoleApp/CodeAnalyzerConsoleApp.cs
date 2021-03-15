@@ -36,9 +36,8 @@ namespace CodeAnalyzerDLLClient
 {
     class CodeAnalyzerConsoleApp
     {
-
         //these need to be static so that all functionNodes and all classNames over all files can be gathered
-        static IEnumerable<string> classNames; //declared as an IEnumerable collection so that Distinct() can be used
+        static IEnumerable<string> classNames; //declared as an IEnumerable collection so that "Distinct" function can be used
         static List<FunctionNode> functionNodes;
 
         static CodeAnalyzerConsoleApp()
@@ -222,7 +221,8 @@ namespace CodeAnalyzerDLLClient
             {
                 if (args.Contains("/X"))                    
                 {
-                        AD.DisplayAnalysisToXML();
+                    Console.WriteLine("XML file created. Please check directory/directories.");
+                    AD.DisplayAnalysisToXML();
                 }
                 else if (args.Contains("/R"))
                 {
@@ -244,16 +244,19 @@ namespace CodeAnalyzerDLLClient
                 {
                     if (args.Contains("/R"))
                     {
+                        Console.WriteLine("XML file created. Please check directory/directories.");
                         AD.DisplayRelationshipsToXML();
                     }
                     else 
-                    { 
+                    {
+                        Console.WriteLine("XML file created. Please check directory/directories.");
                         AD.DisplayAnalysisToXML();
                     }
                 }
             }
             else if(args.Length == 4)
             {
+                Console.WriteLine("XML file created. Please check directory/directories.");
                 AD.DisplayRelationshipsToXML();
             }
         }

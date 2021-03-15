@@ -1,8 +1,0 @@
-<Class>
-  <ClassName>public class TypeRelationshipFinder</ClassName>
-  <Function>
-    <FunctionName>static void Main(string[] args)</FunctionName>
-    <NumberOfScopes>4</NumberOfScopes>
-    <NumberOfLines>26</NumberOfLines>
-  </Function>
-</Class>

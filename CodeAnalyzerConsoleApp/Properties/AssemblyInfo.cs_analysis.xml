@@ -1,7 +1,0 @@
-<Class>
-  <ClassName>
-  </ClassName>
-  <TypeRelationships>
-    <Relationship> uses CodeAnalyzerConsoleApp.</Relationship>
-  </TypeRelationships>
-</Class>
