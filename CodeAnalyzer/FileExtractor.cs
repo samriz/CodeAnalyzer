@@ -10,13 +10,11 @@
 /*
  * Package Operations:
  * -------------------
- *  
+ *  Using System.IO's "File" class, we read all lines in a file and
+ *  save them into a list.
  */
 /* Required Files:
  *   
- *   
- * Build command:
- *   csc 
  *   
  * Maintenance History:
  * --------------------
@@ -48,18 +46,24 @@ namespace CodeAnalyzer
         {
             this.file = file;
             AllExtractedLines = File.ReadAllLines(file).ToList<string>();
-            //RemoveWhiteSpaceAndBlankNewLines();
-            //TrimLines();
-            //AdjustScopes();
         }
-        public string GetFile() => file;
-        public List<string> GetExtractedLines()
-        {
-            return AllExtractedLines;
+        public string GetFile() 
+        { 
+            return file; 
         }
-        public void SetExtractedLines(string file) => AllExtractedLines = File.ReadAllLines(file).ToList<string>();
-        public void SetFile(string file) => this.file = file;
-        private int FindPositionOfNamespace(List<string> list)
+        public List<string> GetExtractedLines() 
+        { 
+            return AllExtractedLines; 
+        }
+        public void SetExtractedLines(string file) 
+        { 
+            AllExtractedLines = File.ReadAllLines(file).ToList<string>(); 
+        }
+        public void SetFile(string file) 
+        { 
+            this.file = file; 
+        }
+        /*private int FindPositionOfNamespace(List<string> list)
         {
             int positionOfNamespace = 0;
             Match namespaceMatch;
@@ -68,28 +72,18 @@ namespace CodeAnalyzer
                 namespaceMatch = Regex.Match(list[i], @"^namespace\s+");
 
                 if(namespaceMatch.Success)
-                //if (list[i].Contains("namespace"))
                 {
                     positionOfNamespace = i;
                     return positionOfNamespace;
                 }
             }
             return positionOfNamespace;
+        }*/
+        public List<string> ExtractFileLines(string file) 
+        { 
+            return File.ReadAllLines(file).ToList<string>(); 
         }
-        public List<string> ExtractFileLines(string file)
-        {
-            //extract file lines and exclude comments
 
-            //List<string> AllExtractedLines = File.ReadAllLines(file).ToList<string>();
-            /*List<string> ExtractedLinesStartingAtNamespace = new List<string>();
-            for (int i = FindPositionOfNamespace(AllExtractedLines); i < AllExtractedLines.Count; i++)
-            {
-                ExtractedLinesStartingAtNamespace.Add(AllExtractedLines[i]);
-            }
-            return FindAndRemoveComments(ExtractedLinesStartingAtNamespace);*/
-            //return FindAndRemoveComments(File.ReadAllLines(file).ToList<string>());
-            return File.ReadAllLines(file).ToList<string>();
-        }
 #if (test_fileextractor)
         static void Main(string[] args)
         {

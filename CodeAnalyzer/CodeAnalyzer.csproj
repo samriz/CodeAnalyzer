@@ -49,7 +49,6 @@
     <Compile Include="AnalysisDisplayer.cs" />
     <Compile Include="FunctionNode.cs" />
     <Compile Include="TypeRelationshipFinder.cs" />
-    <Compile Include="TypeRelationshipNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

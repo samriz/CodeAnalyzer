@@ -21,9 +21,6 @@
 /* Required Files:
  *   FunctionNode.cs
  *   
- * Build command:
- *   csc 
- *   
  * Maintenance History:
  * --------------------
  * ver 1.2 : 22 January 2021
@@ -93,6 +90,8 @@ namespace CodeAnalyzer
             className = "";
             namespaceName = "";   
         }
+
+        //parameterized constructor
         public FunctionTracker(List<string> ExtractedLines) : this()
         {
             this.ExtractedLines = ExtractedLines;

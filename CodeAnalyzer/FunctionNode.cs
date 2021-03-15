@@ -12,13 +12,12 @@
 /*
  * Package Operations:
  * -------------------
- *  
+ *  FunctionNode class encapsulates various information pertaining to 
+ *  a function inside of a C# file: the name of the function, the number 
+ *  of its scopes, number of lines in the function, and the class and namespace
+ *  the function is contained within.
  */
 /* Required Files:
- *   
- *   
- * Build command:
- *   csc 
  *   
  * Maintenance History:
  * --------------------
@@ -42,6 +41,7 @@ namespace CodeAnalyzer
         private string className;
         private string namespaceName;
 
+        //default constructor
         public FunctionNode() 
         {
             this.functionName = "";
@@ -50,6 +50,8 @@ namespace CodeAnalyzer
             this.numberOfScopes = 0;
             this.numberOfLines = 0;
         }
+        
+        //parameterized constructor
         public FunctionNode(string functionName)
         {
             this.functionName = functionName;
@@ -77,11 +79,26 @@ namespace CodeAnalyzer
         {
             return numberOfLines;
         }
-        public void SetNamespaceName(string namespaceName) => this.namespaceName = namespaceName;
-        public void SetClassName(string className) => this.className = className;
-        public void SetFunctionName(string functionName) => this.functionName = functionName;
-        public void SetNumberOfScopes(int numberOfScopes) => this.numberOfScopes = numberOfScopes;
-        public void SetNumberOfLines(int numberOfLines) => this.numberOfLines = numberOfLines;
+        public void SetNamespaceName(string namespaceName) 
+        { 
+            this.namespaceName = namespaceName; 
+        }
+        public void SetClassName(string className) 
+        { 
+            this.className = className; 
+        }
+        public void SetFunctionName(string functionName) 
+        { 
+            this.functionName = functionName; 
+        }
+        public void SetNumberOfScopes(int numberOfScopes) 
+        { 
+            this.numberOfScopes = numberOfScopes; 
+        }
+        public void SetNumberOfLines(int numberOfLines) 
+        { 
+            this.numberOfLines = numberOfLines; 
+        }
 
 // ---------------- test stub --------------------
 #if (test_functionnode)

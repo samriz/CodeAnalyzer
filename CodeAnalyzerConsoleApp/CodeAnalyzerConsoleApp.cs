@@ -1,5 +1,6 @@
 ﻿/////////////////////////////////////////////////////////////////////
-// CodeAnalyzerConsoleApp.cs - Package for using Code Analyzer     //
+// CodeAnalyzerConsoleApp.cs - Package for using Code Analyzer.    //
+//                                                                 //
 // ver 1.0                                                         //
 // Language:    C#, 2020, .Net Framework 4.7.2                     //
 // Platform:    MSI GS65 Stealth, Win10                            //
@@ -10,13 +11,13 @@
 /*
  * Package Operations:
  * -------------------
- *  
+ *  Creates instances of all of the classes I have defined in the 
+ *  "CodeAnalyzer" project.
  */
 /* Required Files:
- *   
- *   
- * Build command:
- *   csc 
+ *   AnalysisDisplayer.cs, ClassNameFinder.cs, DirectorySearcher.cs,
+ *   FileExtractor.cs, FunctionNode.cs, FunctionTracker.cs, 
+ *   TypeRelationshipFinder.cs
  *   
  * Maintenance History:
  * --------------------
@@ -40,7 +41,9 @@ namespace CodeAnalyzerDLLClient
 {
     class CodeAnalyzerConsoleApp
     {
-        static IEnumerable<string> classNames;
+
+        //these need to be static so that all functionNodes and all classNames over all files can be gathered
+        static IEnumerable<string> classNames; //declared as an IEnumerable collection so that Distinct() can be used
         static List<FunctionNode> functionNodes;
 
         static CodeAnalyzerConsoleApp()
@@ -52,6 +55,7 @@ namespace CodeAnalyzerDLLClient
         static void Main(string[] args)
         {
             //verify that at least a directory path is entered
+            //in the below function, we determine if the directory path that was entered is a valid one i.e. that it exists
             if (!VerifyCommandLineArguments(args))
             {
                 Console.WriteLine("Something went wrong. Application will end. Press a key to exit.");
@@ -86,14 +90,10 @@ namespace CodeAnalyzerDLLClient
             foreach (string file in DS.GetFilesWithFullPath())
             {
                 FE = new FileExtractor(file);   
-                FT = new FunctionTracker(FE.GetExtractedLines());
-                //FT.DetectFunctionsAndScopes();
-                //functionNodes.AddRange(FT.GetFunctionNodes());
-                //CNF = new ClassNameFinder();
-                //CollectClassNames(CNF);               
+                FT = new FunctionTracker(FE.GetExtractedLines());             
                 TRF = new TypeRelationshipFinder(FT.GetClassName(), classNames, FE.GetExtractedLines());
                 AD = new AnalysisDisplayer(FE, FT, TRF);
-                DisplayBasedOnCommandLineArguments(args, AD, FE, TRF);
+                DisplayBasedOnCommandLineArguments(args, AD);
             }
         }
         private static void CollectFunctionNodes(ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT)
@@ -167,6 +167,10 @@ namespace CodeAnalyzerDLLClient
                 }
             }
         }
+
+        //determine if just the top directory should be searched or its subdirectories as well
+        //Search the directory using the System.IO "Directory" class
+        //save the files that are found into an instance of DirectorySearcher's "FilesWithFullPath" list
         private static void SetFilesBasedOnCommandLineArguments(string[] args, DirectorySearcher DS)
         {
             if (args.Length == 1)
@@ -185,7 +189,6 @@ namespace CodeAnalyzerDLLClient
                 }
                 else if (args.Contains("/R"))
                 {
-                    //display relationships between all types defined in file set, e.g., inheritance, composition, aggregation, and using relationships instead of the function sizes and complexities
                     DS.SetFilesInDirectory(Directory.GetFiles(DS.GetDirectoryPath(), "*" + DS.GetFilenameExtension(), SearchOption.TopDirectoryOnly).ToList());
                 }
             }
@@ -197,7 +200,6 @@ namespace CodeAnalyzerDLLClient
                 }
                 else if(args.Contains("/S") && args.Contains("/R"))
                 {
-                    //display relationships between all types defined in file set, e.g., inheritance, composition, aggregation, and using relationships instead of the function sizes and complexities
                     DS.SetFilesInDirectory(Directory.GetFiles(DS.GetDirectoryPath(), "*" + DS.GetFilenameExtension(), SearchOption.AllDirectories).ToList());
                 }
                 else if(args.Contains("/X") && args.Contains("/R"))
@@ -213,7 +215,7 @@ namespace CodeAnalyzerDLLClient
                 }
             }
         }
-        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD, FileExtractor FE, TypeRelationshipFinder TRF)
+        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD)
         {
             if(args.Length == 1)
             {
@@ -223,12 +225,10 @@ namespace CodeAnalyzerDLLClient
             {
                 if (args.Contains("/X"))                    
                 {
-                        //write output to XML file
                         AD.DisplayAnalysisToXML();
                 }
                 else if (args.Contains("/R"))
                 {
-                    //display relationships between all types defined in file set, e.g., inheritance, composition, aggregation, and using relationships instead of the function sizes and complexities
                     AD.DisplayRelationshipsToConsole();
                 }
                 else

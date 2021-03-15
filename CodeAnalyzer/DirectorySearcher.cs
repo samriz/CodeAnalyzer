@@ -1,6 +1,6 @@
 ﻿/////////////////////////////////////////////////////////////////////
-// DirectorySearcher.cs - Find all files that meet a particular    //
-// restraint within a directory path of the user's choice          //
+// DirectorySearcher.cs - Find all C# files within a directory     //
+//                                                                 //
 // ver 1.0                                                         //
 // Language:    C#, 2020, .Net Framework 4.7.2                     //
 // Platform:    MSI GS65 Stealth, Win10                            //
@@ -11,13 +11,10 @@
 /*
  * Package Operations:
  * -------------------
- *  
+ *  This is a very simple class. All it does is 
  */
 /* Required Files:
  *   
- *   
- * Build command:
- *   csc 
  *   
  * Maintenance History:
  * --------------------
@@ -50,7 +47,6 @@ namespace CodeAnalyzer
         {
             this.DirectoryPath = DirectoryPath;
             this.FilesWithFullPath = FilesWithFullPath;
-            //AddFileNamesToList(FilesWithFullPath);
         }
         public bool IsDirectoryPathTypeAString(string path)
         {
@@ -68,8 +64,6 @@ namespace CodeAnalyzer
         public void SetFilesInDirectory(List<string> FilesWithFullPath)
         {
             this.FilesWithFullPath = FilesWithFullPath;
-            //FilesWithFullPath = Directory.GetFiles(DirectoryPath, filetype, SearchOption.AllDirectories).ToList();
-            //AddFileNamesToList(FilesWithFullPath);
         }
         public string GetDirectoryPath() 
         { 

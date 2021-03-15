@@ -14,10 +14,8 @@
  *  
  */
 /* Required Files:
+ *   FunctionNode.cs
  *   
- *   
- * Build command:
- *   csc 
  *   
  * Maintenance History:
  * --------------------

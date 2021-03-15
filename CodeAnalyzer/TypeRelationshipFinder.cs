@@ -1,6 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////////////////
-// TypeRelationshipFinder.cs - Finds all of the type relationships         //
-// in the package.                                                         //
+// TypeRelationshipFinder.cs - Finds all of the classes a particular class //
+// uses and/or depends on.                                                 //
+//                                                                         //
 // ver 1.0                                                                 //
 // Language:    C#, 2020, .Net Framework 4.7.2                             //
 // Platform:    MSI GS65 Stealth, Win10                                    //
@@ -11,13 +12,14 @@
 /*
  * Package Operations:
  * -------------------
- *  
+ *  The TypeRelationshipFinder class has 2 parameterized constructors that
+ *  take in the class name that you want to find type relationships in, a
+ *  list/collection of class names you may have compiled together using the
+ *  ClassNameFinder class, and a list of file lines you may have extracted using
+ *  the FileExtractor class.
  */
 /* Required Files:
  *   
- *   
- * Build command:
- *   csc 
  *   
  * Maintenance History:
  * --------------------
@@ -37,28 +39,33 @@ namespace CodeAnalyzer
         private readonly List<string> classNames;
         private readonly List<string> fileLines;
         private readonly string className;
-        //private IEnumerable<string> relationships;
 
+        //default constructor
         public TypeRelationshipFinder()
         {
 
         }
+
+        //parameterized constructor
         public TypeRelationshipFinder(string className, List<string> classNames, List<string> fileLines)
         {
             this.className = className;
             this.classNames = classNames;
             this.fileLines = fileLines;
-
-            //relationships = new List<string>();
         }
+
+        //parameterized constructor.
+        //this one accepts an IEnumerable collection so that the Distinct() function can be called to eliminate unnecessary duplicates
         public TypeRelationshipFinder(string className, IEnumerable<string> classNames, List<string> fileLines)
         {
             this.className = className;
             this.classNames = classNames.ToList();
             this.fileLines = fileLines;
-            //relationships = new List<string>();
         }
-        public IEnumerable<string> FindRelationships()
+        
+        //compare each line of the file with a list of all user-defined class names in a particular directory
+        //returns a list of strings that contain the class name and which types it uses
+        private IEnumerable<string> FindRelationships()
         {
             IEnumerable<string> relationships = new List<string>();
             foreach (var line in fileLines)
@@ -69,19 +76,16 @@ namespace CodeAnalyzer
                     {
                         string relationshipString = className + " uses " + name + ".";
                         relationships = relationships.Append(relationshipString);
-                        //Console.WriteLine(relationshipString);
                     }
                 }
             }
             return relationships;
         }
-        public IEnumerable<string> GetRelationships()
-        {
-            //List<string> relationshipList = FindRelationships().Distinct().ToList();
-            //return relationshipList;
-            return FindRelationships().Distinct();
-        }
-        // ---------------- test stub --------------------
+
+        //return all of the relationships a certain class has
+        public IEnumerable<string> GetRelationships() => FindRelationships().Distinct();
+        
+// ---------------- test stub --------------------
 #if (test_typerelationshipfinder)
         static void Main(string[] args)
         {

@@ -10,13 +10,13 @@
 /*
  * Package Operations:
  * -------------------
- *  
+ *  AnalysisDisplayer class contains functions to display information
+ *  about classes and their functions to the console or to an xml file.
+ *  The functions that deal with xml files will create an xml document
+ *  and print the information to that file.
  */
 /* Required Files:
  *   
- *   
- * Build command:
- *   csc 
  *   
  * Maintenance History:
  * --------------------
