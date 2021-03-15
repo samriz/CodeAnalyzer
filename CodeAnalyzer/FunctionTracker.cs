@@ -92,6 +92,8 @@ namespace CodeAnalyzer
             this.ExtractedLines = ExtractedLines;
             DetectFunctionsAndScopes();
         }
+
+        //find namespace, class, functions, and scopes based on certain patterns using Regex and Match classes
         private void DetectFunctionsAndScopes()
         {
             int scopeCount = 0;
@@ -102,6 +104,7 @@ namespace CodeAnalyzer
             adjustedLines = TrimLines(adjustedLines);
             adjustedLines = AdjustScopes(adjustedLines);
 
+            //start at the namespace
             for (int i = FindPositionOfNamespace(adjustedLines); i < adjustedLines.Count; i++)
             {
                 namespaceMatch = Regex.Match(adjustedLines[i], namespacePattern);
@@ -135,14 +138,14 @@ namespace CodeAnalyzer
                     FN = new FunctionNode(functionName);
 
                     //run through just the function to collect function info
-                    CollectFunctionData(adjustedLines, ref i, ref FN, ref scopeCount, ref numberOfLines);
+                    CollectFunctionData(adjustedLines, ref i, ref FN, scopeCount, numberOfLines);
                     scopeCount = 0; //reset the scope count for next function
                 }
             }
         }
 
         //gather information about function
-        private void CollectFunctionData(List<string> functionLines, ref int functionPosition, ref FunctionNode FN, ref int scopeCount, ref int numberOfLines)
+        private void CollectFunctionData(List<string> functionLines, ref int functionPosition, ref FunctionNode FN, int scopeCount, int numberOfLines)
         {
             //traverse the function only
             for (int j = functionPosition + 1; j < functionLines.Count; j++)
@@ -175,7 +178,7 @@ namespace CodeAnalyzer
                 }
                 if (functionStack.Count < 1)
                 {
-                    --numberOfLines;
+                    --numberOfLines; //decrease by 1 so we don't count the function ending brace
                     --scopeCount; //decrease scopeCount by 1 so we don't take into account the curly brackets of the function itself
                     FN.SetClassName(className);
                     FN.SetNamespaceName(namespaceName);

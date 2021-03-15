@@ -1,12 +1,43 @@
 <Class>
   <ClassName>public class AnalysisDisplayer</ClassName>
-  <TypeRelationships>
-    <Relationship>public class AnalysisDisplayer uses AnalysisDisplayer.</Relationship>
-    <Relationship>public class AnalysisDisplayer uses FunctionNode.</Relationship>
-    <Relationship>public class AnalysisDisplayer uses FileExtractor.</Relationship>
-    <Relationship>public class AnalysisDisplayer uses FunctionTracker.</Relationship>
-    <Relationship>public class AnalysisDisplayer uses TypeRelationshipFinder.</Relationship>
-    <Relationship>public class AnalysisDisplayer uses DirectorySearcher.</Relationship>
-    <Relationship>public class AnalysisDisplayer uses ClassNameFinder.</Relationship>
-  </TypeRelationships>
+  <Function>
+    <FunctionName>public string GetXMLName()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void DisplayAnalysisToStandardOutput()</FunctionName>
+    <NumberOfScopes>1</NumberOfScopes>
+    <NumberOfLines>3</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void DisplayAnalysisToXML()</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>8</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void DisplayRelationshipsToConsole()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>0</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void DisplayRelationshipsToConsole(IEnumerable&lt;string&gt; relationships)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>0</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void DisplayRelationshipsToXML()</FunctionName>
+    <NumberOfScopes>1</NumberOfScopes>
+    <NumberOfLines>24</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private void CreateXMLDocument()</FunctionName>
+    <NumberOfScopes>1</NumberOfScopes>
+    <NumberOfLines>33</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>static void Main(string[] args)</FunctionName>
+    <NumberOfScopes>1</NumberOfScopes>
+    <NumberOfLines>16</NumberOfLines>
+  </Function>
 </Class>

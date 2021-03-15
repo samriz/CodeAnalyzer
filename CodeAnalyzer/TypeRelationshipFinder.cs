@@ -55,7 +55,7 @@ namespace CodeAnalyzer
         }
 
         //parameterized constructor.
-        //this one accepts an IEnumerable collection so that the Distinct() function can be called to eliminate unnecessary duplicates
+        //this one accepts an IEnumerable collection so that the Distinct function can be called to eliminate unnecessary duplicates
         public TypeRelationshipFinder(string className, IEnumerable<string> classNames, List<string> fileLines)
         {
             this.className = className;

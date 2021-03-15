@@ -152,7 +152,7 @@ namespace CodeAnalyzerDLLClient
                 }
                 //if the first argument is a valid path then make sure the other command-line arguments are the allowed ones: /S, /X, /R
                 {
-                    if (!args.Contains("/S") && !args.Contains("/X") && !args.Contains("/R"))
+                    if (args.Length > 1 && !args.Contains("/S") && !args.Contains("/X") && !args.Contains("/R"))
                     {
                         Console.WriteLine("Invalid command(s) detected.");
                         return false;

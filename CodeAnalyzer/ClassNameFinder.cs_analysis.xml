@@ -1,10 +1,8 @@
 <Class>
   <ClassName>public class ClassNameFinder</ClassName>
-  <TypeRelationships>
-    <Relationship>public class ClassNameFinder uses ClassNameFinder.</Relationship>
-    <Relationship>public class ClassNameFinder uses FunctionNode.</Relationship>
-    <Relationship>public class ClassNameFinder uses DirectorySearcher.</Relationship>
-    <Relationship>public class ClassNameFinder uses FileExtractor.</Relationship>
-    <Relationship>public class ClassNameFinder uses FunctionTracker.</Relationship>
-  </TypeRelationships>
+  <Function>
+    <FunctionName>static void Main(string[] args)</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>15</NumberOfLines>
+  </Function>
 </Class>

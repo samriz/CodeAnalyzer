@@ -1,6 +1,0 @@
-<Class>
-  <ClassName>public class TypeRelationshipNode</ClassName>
-  <TypeRelationships>
-    <Relationship>public class TypeRelationshipNode uses TypeRelationshipNode.</Relationship>
-  </TypeRelationships>
-</Class>

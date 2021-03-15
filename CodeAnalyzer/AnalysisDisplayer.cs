@@ -44,8 +44,6 @@ namespace CodeAnalyzer
         //default constructor
         public AnalysisDisplayer()
         {
-            //FE = null;
-            //FT = null;
         }
         public AnalysisDisplayer(FileExtractor FE, FunctionTracker FT, TypeRelationshipFinder TRF) : this(FE.GetFile())
         {
@@ -81,7 +79,7 @@ namespace CodeAnalyzer
             }
         }
 
-        //call CreateXMLDocument() as long as functionNodes isn't empty
+        //call CreateXMLDocument as long as functionNodes isn't empty
         public void DisplayAnalysisToXML()
         { 
             if(functionNodes.Count < 1)
