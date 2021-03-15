@@ -16,7 +16,7 @@
  *  and print the information to that file.
  */
 /* Required Files:
- *   
+ *   FunctionNode.cs, FileExtractor.cs, FunctionTracker.cs, TypeRelationshipFinder.cs
  *   
  * Maintenance History:
  * --------------------
@@ -40,10 +40,12 @@ namespace CodeAnalyzer
         FileExtractor FE;
         FunctionTracker FT;
         TypeRelationshipFinder TRF;
+        
+        //default constructor
         public AnalysisDisplayer()
         {
-            FE = null;
-            FT = null;
+            //FE = null;
+            //FT = null;
         }
         public AnalysisDisplayer(FileExtractor FE, FunctionTracker FT, TypeRelationshipFinder TRF) : this(FE.GetFile())
         {
@@ -56,6 +58,8 @@ namespace CodeAnalyzer
         {
             this.functionNodes = functionNodes;
         }
+
+        //parameterized constructor that specifies the name of the xml file
         public AnalysisDisplayer(string fileName): this()
         {
             this.XML_Name = fileName + "_analysis.xml";
@@ -64,6 +68,8 @@ namespace CodeAnalyzer
         {
             return XML_Name;
         }
+
+        //iterate through each element in functionNodes and print its contents to the console
         public void DisplayAnalysisToStandardOutput()
         {
             foreach (var node in functionNodes)
@@ -74,6 +80,8 @@ namespace CodeAnalyzer
                 Console.WriteLine("Number of lines: {0}\n", node.GetNumberOfLines());
             }
         }
+
+        //call CreateXMLDocument() as long as functionNodes isn't empty
         public void DisplayAnalysisToXML()
         { 
             if(functionNodes.Count < 1)
@@ -85,6 +93,9 @@ namespace CodeAnalyzer
                 CreateXMLDocument();     
             }
         }
+
+        /*iterate through the type relationships compiled by the TypeRelationshipFinder
+        class and print its contents to the console*/
         public void DisplayRelationshipsToConsole()
         {
             Console.WriteLine("Type relationships for {0}:", FT.GetClassName());
@@ -94,6 +105,8 @@ namespace CodeAnalyzer
             }
             Console.WriteLine("");
         }
+
+        //overloaded method that takes in an IEnumerable collection
         public void DisplayRelationshipsToConsole(IEnumerable<string> relationships)
         {
             Console.WriteLine("Type relationships for {0}:", FT.GetClassName());
@@ -103,6 +116,8 @@ namespace CodeAnalyzer
             }
             Console.WriteLine("");
         }
+
+        //create xml document and write type relationships in it
         public void DisplayRelationshipsToXML()
         {
             XmlDocument analysisXML = new XmlDocument();
@@ -130,6 +145,8 @@ namespace CodeAnalyzer
             analysisXML.AppendChild(rootNode);
             analysisXML.Save(XML_Name);
         }
+
+        //create xml document and write contents of functionNodes to it
         private void CreateXMLDocument()
         {
             XmlDocument analysisXML = new XmlDocument();
@@ -166,30 +183,7 @@ namespace CodeAnalyzer
             analysisXML.AppendChild(rootNode);
             analysisXML.Save(XML_Name);
         }
-        private void CreateXMLDocumentUsingXmlWriter()
-        {
-            /*XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent = true;
-                settings.IndentChars = ("    ");
-                settings.CloseOutput = true;
-                settings.OmitXmlDeclaration = true;
-                XmlDocument
-                using (XmlWriter writer = XmlWriter.Create(XML_Name, settings))
-                {
-                    writer.WriteStartElement("CodeAnalyzer");
-                    //foreach (var node in functionScopes)
-                    foreach (FunctionNode node in FT.GetFunctionNodes())
-                    {
-                        writer.WriteStartElement("Analysis", "Class Name: " + node.GetClassName());
-                        writer.WriteElementString("Analysis", "Function Name: " + node.GetFunctionName());
-                        writer.WriteElementString("Analysis", "Number of Scopes: " + node.GetNumberOfScopes());
-                        writer.WriteElementString("Analysis", "Number of Lines: " + node.GetNumberOfLines());
-                    }
-                    writer.WriteEndElement();
-                    writer.WriteEndDocument();
-                    writer.Flush();
-                }*/
-        }
+
 // ---------------- test stub --------------------
 #if (test_analysisdisplayer)
         static void Main(string[] args)

@@ -38,7 +38,6 @@ namespace CodeAnalyzer
 {
     public class FunctionTracker
     {
-        //static List<string> keywords = new List<string> { "namespace", "class", "if", "for", "foreach", "while", "do", "public", "private", "static", "void", "{", "}" };
         private Match namespaceMatch;
         private Match classMatch;
         private Match functionMatch1;
@@ -62,7 +61,6 @@ namespace CodeAnalyzer
         private static readonly string startScopePattern;
         private static readonly string elsePattern;
         private static readonly string doWhilePattern;
-        //private static readonly string endScopePattern;
         private static readonly string endBracePattern;
 
         //static contructor below
@@ -70,14 +68,11 @@ namespace CodeAnalyzer
         {
             namespacePattern = @"(namespace)\s+\w+\s*\{";
             classPattern = @"(class)\s+(\w+)\s*\{";
-            //functionPattern = @"(\w+\s+)?(\w+\s+)?\w+\s+\w+\s*\(";
-            //functionPattern = @"(public | private | static)?\s+(\w+\s+)?(\w+\s+)?\w+\s*\(";
             functionPattern = @"(\w+\s+)?(\w+\s+)(\w+\s+)(\w+\s*)\(";
             openingBracePattern = @"\{";
             startScopePattern = @"(for|foreach|while|if|else\s+if)\s*\(";
             elsePattern = @"else\s*{";
             doWhilePattern = @"(do)\s*\{";
-            //endScopePattern = @"\){";
             endBracePattern = @"\}";    
         }
 
@@ -133,7 +128,6 @@ namespace CodeAnalyzer
                 startScopeMatch = Regex.Match(adjustedLines[i], startScopePattern);
                 elseMatch = Regex.Match(adjustedLines[i], elsePattern);
                 doWhileMatch = Regex.Match(adjustedLines[i], doWhilePattern);
-                //openingBraceMatch = Regex.Match(adjustedLines[i], openingBracePattern);
                 if (functionMatch1.Success && !startScopeMatch.Success && !elseMatch.Success && !doWhileMatch.Success)
                 {
                     functionStack.Push(adjustedLines[i]);
@@ -150,7 +144,8 @@ namespace CodeAnalyzer
         //gather information about function
         private void CollectFunctionData(List<string> functionLines, ref int functionPosition, ref FunctionNode FN, ref int scopeCount, ref int numberOfLines)
         {
-            for (int j = functionPosition + 1; j < functionLines.Count; j++) //traverse the function only
+            //traverse the function only
+            for (int j = functionPosition + 1; j < functionLines.Count; j++)
             {
                 ++numberOfLines;
                 startScopeMatch = Regex.Match(functionLines[j], startScopePattern);
@@ -216,7 +211,6 @@ namespace CodeAnalyzer
         //move an opening bracket to the line it is associated with
         private List<string> AdjustScopes(List<string> lines)
         {
-            //for(int i = 1; i < scopeList.Count; i++)
             for (int i = 0; i < lines.Count; i++)
             {
                 if (lines[i].StartsWith("{"))
@@ -227,34 +221,6 @@ namespace CodeAnalyzer
             }
             return lines;
         }
-
-        //find comments using Regex and Match class
-        /*private List<string> FindComments(List<string> lines)
-        {
-            Match singleLineCommentMatch;
-            Match multiLineCommentMatch1;
-
-            for (int i = 0; i < lines.Count; i++)
-            {
-                singleLineCommentMatch = Regex.Match(lines[i], @"\/\/");
-                multiLineCommentMatch1 = Regex.Match(lines[i], @"\/\*\s*");
-            }
-            return lines;
-        }*/
-
-        //remove lines that begin with "using"
-        /*private void RemoveUsings(List<string> lines)
-        {
-            Match usingMatch;
-            for (int i = 0; i < lines.Count; i++)
-            {
-                usingMatch = Regex.Match(lines[i], @"^(using)\s+");
-                if (usingMatch.Success)
-                {
-                    lines.RemoveAt(i);
-                }
-            }
-        }*/
 
         //find index in list where namespace is declared
         private int FindPositionOfNamespace(List<string> list)
@@ -274,11 +240,26 @@ namespace CodeAnalyzer
             }
             return positionOfNamespace;
         }
-        public void SetClassName(string className) => this.className = className;
-        public void SetNamespaceName(string namespaceName) => this.namespaceName = namespaceName;
-        public string GetClassName() => className;
-        public string GetNamespaceName() => namespaceName;
-        public List<FunctionNode> GetFunctionNodes() => functionNodes;
+        public void SetClassName(string className) 
+        { 
+            this.className = className; 
+        }
+        public void SetNamespaceName(string namespaceName) 
+        { 
+            this.namespaceName = namespaceName; 
+        }
+        public string GetClassName() 
+        { 
+            return className; 
+        }
+        public string GetNamespaceName() 
+        { 
+            return namespaceName; 
+        }
+        public List<FunctionNode> GetFunctionNodes() 
+        { 
+            return functionNodes; 
+        }
 
         // ---------------- test stub --------------------
 #if (test_functiontracker)

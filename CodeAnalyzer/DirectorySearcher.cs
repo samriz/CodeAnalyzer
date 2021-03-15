@@ -48,19 +48,10 @@ namespace CodeAnalyzer
             this.DirectoryPath = DirectoryPath;
             this.FilesWithFullPath = FilesWithFullPath;
         }
-        public bool IsDirectoryPathTypeAString(string path)
-        {
-            //is the user-defined directory path a string?
-            if (DirectoryPath.GetType() != typeof(string))
-            {
-                return false;
-            }
-            else 
-            { 
-                return true; 
-            }
+        public void SetDirectoryPath(string DirectoryPath) 
+        { 
+            this.DirectoryPath = DirectoryPath; 
         }
-        public void SetDirectoryPath(string DirectoryPath) => this.DirectoryPath = DirectoryPath;
         public void SetFilesInDirectory(List<string> FilesWithFullPath)
         {
             this.FilesWithFullPath = FilesWithFullPath;

@@ -16,7 +16,6 @@
 /* Required Files:
  *   FunctionNode.cs
  *   
- *   
  * Maintenance History:
  * --------------------
  * ver 1.2 : 22 January 2021
@@ -33,15 +32,11 @@ namespace CodeAnalyzer
 {
     public class ClassNameFinder
     {
-        private static readonly string inheritancePattern;
         private List<FunctionNode> functionNodes;
-        static ClassNameFinder()
-        {
-            inheritancePattern = @"(class)\s+(\w+)\s*\:\s*(\w+)";           
-        }
+
         public ClassNameFinder()
         {
-            functionNodes = new List<FunctionNode>();
+            //functionNodes = new List<FunctionNode>();
         }
         public ClassNameFinder(List<FunctionNode> functionNodes)
         {
@@ -50,7 +45,6 @@ namespace CodeAnalyzer
         public List<string> GetAllClassNames()
         {
             List<string> classNames = new List<string>();
-
             foreach (var node in functionNodes)
             {
                 classNames.Add(node.GetClassName());
@@ -85,19 +79,7 @@ namespace CodeAnalyzer
             }
             return distinctClassNamesList;
         }
-        public bool InheritanceExists(List<string> ExtractedLines)
-        {
-            Match inheritanceMatch;
-            foreach(var line in ExtractedLines)
-            {
-                inheritanceMatch = Regex.Match(line, inheritancePattern);
-                if (inheritanceMatch.Success)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+
 // ---------------- test stub --------------------
 #if (test_classnamefinder)
         static void Main(string[] args)

@@ -83,7 +83,10 @@ namespace CodeAnalyzer
         }
 
         //return all of the relationships a certain class has
-        public IEnumerable<string> GetRelationships() => FindRelationships().Distinct();
+        public IEnumerable<string> GetRelationships() 
+        { 
+            return FindRelationships().Distinct(); 
+        }
         
 // ---------------- test stub --------------------
 #if (test_typerelationshipfinder)

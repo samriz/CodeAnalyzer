@@ -31,17 +31,19 @@ using System.Text.RegularExpressions;
 
 namespace CodeAnalyzer
 {
-    //this is a test comment
     public class FileExtractor
     {
-        //this is another test comment
         private List<string> AllExtractedLines;
         string file;
 
+        //default constructor
         public FileExtractor()
         {
 
         }
+
+        //parameterized constructor
+        //using System.IO's "File" class to read all lines from the file and save it into a list
         public FileExtractor(string file)
         {
             this.file = file;
@@ -55,6 +57,8 @@ namespace CodeAnalyzer
         { 
             return AllExtractedLines; 
         }
+
+        //using System.IO's "File" class to read all lines from the file and save it into a list
         public void SetExtractedLines(string file) 
         { 
             AllExtractedLines = File.ReadAllLines(file).ToList<string>(); 
@@ -63,22 +67,6 @@ namespace CodeAnalyzer
         { 
             this.file = file; 
         }
-        /*private int FindPositionOfNamespace(List<string> list)
-        {
-            int positionOfNamespace = 0;
-            Match namespaceMatch;
-            for (int i = 0; i < list.Count; i++)
-            {
-                namespaceMatch = Regex.Match(list[i], @"^namespace\s+");
-
-                if(namespaceMatch.Success)
-                {
-                    positionOfNamespace = i;
-                    return positionOfNamespace;
-                }
-            }
-            return positionOfNamespace;
-        }*/
         public List<string> ExtractFileLines(string file) 
         { 
             return File.ReadAllLines(file).ToList<string>(); 

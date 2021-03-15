@@ -31,12 +31,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeAnalyzer;
-/*
- 1) the Code Analyzer needs to accept a directory path in the command-line arguments 
-    -this is taken care of by DirectorySearcher
-2) we need to read in all of the C# files in this path
-    -this is taken care of by FileExtractor
- */
+
 namespace CodeAnalyzerDLLClient
 {
     class CodeAnalyzerConsoleApp
@@ -66,6 +61,8 @@ namespace CodeAnalyzerDLLClient
             {
                 string path = GetPathFromCommandLine(args);
                 DirectorySearcher DS = new DirectorySearcher(path);
+
+                //search directory or directories and fill a list with the C# file names and paths
                 SetFilesBasedOnCommandLineArguments(args, DS);
                 Console.WriteLine("Path: {0}\n", path);
 
