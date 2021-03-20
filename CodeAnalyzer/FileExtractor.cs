@@ -41,7 +41,6 @@ namespace CodeAnalyzer
         {
 
         }
-
         //parameterized constructor
         //using System.IO's "File" class to read all lines from the file and save it into a list
         public FileExtractor(string file)
@@ -57,11 +56,16 @@ namespace CodeAnalyzer
         { 
             return AllExtractedLines; 
         }
-
         //using System.IO's "File" class to read all lines from the file and save it into a list
-        public void SetExtractedLines(string file) 
-        { 
+        public void SetExtractedLines(string file)
+        {
             AllExtractedLines = File.ReadAllLines(file).ToList<string>(); 
+            //AllExtractedLines = filesLines;
+        }
+        public void SetExtractedLines(List<string> filesLines) 
+        {
+            //AllExtractedLines = File.ReadAllLines(file).ToList<string>(); 
+            AllExtractedLines = filesLines;
         }
         public void SetFile(string file) 
         { 

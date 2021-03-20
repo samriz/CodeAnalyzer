@@ -34,11 +34,11 @@ using CodeAnalyzer;
 
 namespace CodeAnalyzerDLLClient
 {
-    class CodeAnalyzerConsoleApp
+    public class CodeAnalyzerConsoleApp
     {
         //these need to be static so that all functionNodes and all classNames over all files can be gathered
-        static IEnumerable<string> classNames; //declared as an IEnumerable collection so that "Distinct" function can be used
-        static List<FunctionNode> functionNodes;
+        public static IEnumerable<string> classNames; //declared as an IEnumerable collection so that "Distinct" function can be used
+        public static List<FunctionNode> functionNodes;
 
         static CodeAnalyzerConsoleApp()
         {
@@ -46,7 +46,7 @@ namespace CodeAnalyzerDLLClient
             functionNodes = new List<FunctionNode>();
         }
 #if(test_codeanalyzerconsoleapp)
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             //verify that at least a directory path is entered
             //in the below function, we determine if the directory path that was entered is a valid one i.e. that it exists
@@ -81,7 +81,7 @@ namespace CodeAnalyzerDLLClient
             Console.ReadKey();
         }
 #endif
-        private static void SearchAndAnalyze(string[] args, ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT, ref AnalysisDisplayer AD, ref TypeRelationshipFinder TRF)
+        public static void SearchAndAnalyze(string[] args, ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT, ref AnalysisDisplayer AD, ref TypeRelationshipFinder TRF)
         {
             foreach (string file in DS.GetFilesWithFullPath())
             {
@@ -92,7 +92,7 @@ namespace CodeAnalyzerDLLClient
                 DisplayBasedOnCommandLineArguments(args, AD);
             }
         }
-        private static void CollectFunctionNodes(ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT)
+        public static void CollectFunctionNodes(ref DirectorySearcher DS, ref FileExtractor FE, ref FunctionTracker FT)
         {
             foreach (string file in DS.GetFilesWithFullPath())
             {
@@ -101,7 +101,7 @@ namespace CodeAnalyzerDLLClient
                 functionNodes.AddRange(FT.GetFunctionNodes());
             }
         }
-        private static void CollectClassNames(ref ClassNameFinder CNF, ref DirectorySearcher DS)
+        public static void CollectClassNames(ref ClassNameFinder CNF, ref DirectorySearcher DS)
         {          
             foreach(string file in DS.GetFilesWithFullPath())
             {
@@ -111,12 +111,12 @@ namespace CodeAnalyzerDLLClient
                 }
             } 
         }
-        private static string GetPathFromCommandLine(string[] args)
+        public static string GetPathFromCommandLine(string[] args)
         {
             string path = Path.GetFullPath(args[0]);
             return path;
         }
-        private static void DisplayListOfFoundFiles(DirectorySearcher DS)
+        public static void DisplayListOfFoundFiles(DirectorySearcher DS)
         {
             List<string> DiscoveredFileNames = DS.GetFileNames();
             Console.WriteLine("\nNumber of {0} files found in this directory: {1}", DS.GetFilenameExtension(), DiscoveredFileNames.Count);
@@ -167,7 +167,7 @@ namespace CodeAnalyzerDLLClient
         //determine if just the top directory should be searched or its subdirectories as well
         //Search the directory using the System.IO "Directory" class
         //save the files that are found into an instance of DirectorySearcher's "FilesWithFullPath" list
-        private static void SetFilesBasedOnCommandLineArguments(string[] args, DirectorySearcher DS)
+        public static void SetFilesBasedOnCommandLineArguments(string[] args, DirectorySearcher DS)
         {
             if (args.Length == 1)
             {
@@ -211,7 +211,7 @@ namespace CodeAnalyzerDLLClient
                 }
             }
         }
-        private static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD)
+        public static void DisplayBasedOnCommandLineArguments(string[] args, AnalysisDisplayer AD)
         {
             if(args.Length == 1)
             {

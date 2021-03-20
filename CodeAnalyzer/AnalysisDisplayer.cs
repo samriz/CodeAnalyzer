@@ -45,23 +45,22 @@ namespace CodeAnalyzer
         public AnalysisDisplayer()
         {
         }
+        //parameterized constructor that specifies the name of the xml file
+        public AnalysisDisplayer(string fileName)
+        {
+            this.XML_Name = fileName + "_analysis.xml";
+        }
+        public AnalysisDisplayer(string fileName, List<FunctionNode> functionNodes) : this(fileName)
+        {
+            this.functionNodes = functionNodes;
+        }
         public AnalysisDisplayer(FileExtractor FE, FunctionTracker FT, TypeRelationshipFinder TRF) : this(FE.GetFile())
         {
             this.FE = FE;
             this.FT = FT;
             this.TRF = TRF;
             functionNodes = FT.GetFunctionNodes();
-        }
-        public AnalysisDisplayer(string fileName, List<FunctionNode> functionNodes) : this(fileName)
-        {
-            this.functionNodes = functionNodes;
-        }
-
-        //parameterized constructor that specifies the name of the xml file
-        public AnalysisDisplayer(string fileName): this()
-        {
-            this.XML_Name = fileName + "_analysis.xml";
-        }
+        }     
         public string GetXMLName()
         {
             return XML_Name;
@@ -91,7 +90,17 @@ namespace CodeAnalyzer
                 CreateXMLDocument();     
             }
         }
-
+        public XmlDocument GetAnalysisInXML()
+        {
+            if (functionNodes.Count < 1)
+            {
+                return null;
+            }
+            else
+            {
+                return ReturnXMLDocument();
+            }
+        }
         /*iterate through the type relationships compiled by the TypeRelationshipFinder
         class and print its contents to the console*/
         public void DisplayRelationshipsToConsole()
@@ -181,8 +190,44 @@ namespace CodeAnalyzer
             analysisXML.AppendChild(rootNode);
             analysisXML.Save(XML_Name);
         }
+        private XmlDocument ReturnXMLDocument()
+        {
+            XmlDocument analysisXML = new XmlDocument();
+            XmlElement rootElement = analysisXML.CreateElement("Class");
+            XmlNode rootNode = rootElement;
 
-// ---------------- test stub --------------------
+            XmlElement classNameElement = analysisXML.CreateElement("ClassName");
+            classNameElement.InnerText = functionNodes[0].GetClassName();
+            XmlNode classNameNode = classNameElement;
+            rootNode.AppendChild(classNameNode);
+
+            foreach (var node in functionNodes)
+            {
+                XmlElement functionElement = analysisXML.CreateElement("Function");
+                XmlNode functionNode = functionElement;
+
+                XmlElement functionNameElement = analysisXML.CreateElement("FunctionName");
+                functionNameElement.InnerText = node.GetFunctionName();
+                XmlNode functionNameNode = functionNameElement;
+
+                XmlElement scopeElement = analysisXML.CreateElement("NumberOfScopes");
+                scopeElement.InnerText = node.GetNumberOfScopes().ToString();
+                XmlNode scopeNode = scopeElement;
+
+                XmlElement linesElement = analysisXML.CreateElement("NumberOfLines");
+                linesElement.InnerText = node.GetNumberOfLines().ToString();
+                XmlNode linesNode = linesElement;
+
+                functionNode.AppendChild(functionNameNode);
+                functionNode.AppendChild(scopeNode);
+                functionNode.AppendChild(linesNode);
+                rootNode.AppendChild(functionNode);
+            }
+            analysisXML.AppendChild(rootNode);
+            return analysisXML;
+        }
+
+        // ---------------- test stub --------------------
 #if (test_analysisdisplayer)
         static void Main(string[] args)
         {

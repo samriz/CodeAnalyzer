@@ -1,0 +1,28 @@
+<Class>
+  <ClassName>public class FileExtractor</ClassName>
+  <Function>
+    <FunctionName>public string GetFile()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetExtractedLines(string file)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>2</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetExtractedLines(List&lt;string&gt; filesLines)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>2</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetFile(string file)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>static void Main(string[] args)</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>11</NumberOfLines>
+  </Function>
+</Class>

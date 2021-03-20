@@ -1,0 +1,58 @@
+<Class>
+  <ClassName>public class FunctionNode</ClassName>
+  <Function>
+    <FunctionName>public string GetClassName()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public string GetFunctionName()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public string GetNamespaceName()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public int GetNumberOfScopes()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public int GetNumberOfLines()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetNamespaceName(string namespaceName)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetClassName(string className)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetFunctionName(string functionName)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetNumberOfScopes(int numberOfScopes)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetNumberOfLines(int numberOfLines)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>static void Main(string[] args)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+</Class>

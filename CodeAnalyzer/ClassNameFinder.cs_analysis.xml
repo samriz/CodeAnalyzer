@@ -1,0 +1,8 @@
+<Class>
+  <ClassName>public class ClassNameFinder</ClassName>
+  <Function>
+    <FunctionName>static void Main(string[] args)</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>15</NumberOfLines>
+  </Function>
+</Class>

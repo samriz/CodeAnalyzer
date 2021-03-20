@@ -1,0 +1,53 @@
+<Class>
+  <ClassName>public class FunctionTracker</ClassName>
+  <Function>
+    <FunctionName>private void DetectFunctionsAndScopes()</FunctionName>
+    <NumberOfScopes>6</NumberOfScopes>
+    <NumberOfLines>46</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private void CollectFunctionData(List&lt;string&gt; functionLines, ref int functionPosition, ref FunctionNode FN, int scopeCount, int numberOfLines)</FunctionName>
+    <NumberOfScopes>6</NumberOfScopes>
+    <NumberOfLines>42</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private void TrimLines(List&lt;string&gt; lines)</FunctionName>
+    <NumberOfScopes>3</NumberOfScopes>
+    <NumberOfLines>15</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private void AdjustScopes(List&lt;string&gt; lines)</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>9</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>private int FindPositionOfNamespace(List&lt;string&gt; list)</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>14</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetClassName(string className)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void SetNamespaceName(string namespaceName)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public string GetClassName()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public string GetNamespaceName()</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>static void Main(string[] args)</FunctionName>
+    <NumberOfScopes>2</NumberOfScopes>
+    <NumberOfLines>13</NumberOfLines>
+  </Function>
+</Class>

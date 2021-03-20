@@ -50,7 +50,7 @@ namespace CodeAnalyzer
         private string className;
         private string namespaceName;
 
-        readonly List<string> ExtractedLines;
+        private List<string> ExtractedLines;
         private List<FunctionNode> functionNodes;
 
         //regular expression patterns:
@@ -79,7 +79,7 @@ namespace CodeAnalyzer
         //default constructor
         public FunctionTracker()
         {
-            ExtractedLines = new List<string>();
+            //ExtractedLines = new List<string>();
             functionNodes = new List<FunctionNode>();            
             functionStack = new Stack();
             className = "";
@@ -101,8 +101,8 @@ namespace CodeAnalyzer
             FunctionNode FN;
             string functionName;
             List<string> adjustedLines = ExtractedLines;
-            adjustedLines = TrimLines(adjustedLines);
-            adjustedLines = AdjustScopes(adjustedLines);
+            TrimLines(adjustedLines);
+            AdjustScopes(adjustedLines);
 
             //start at the namespace
             for (int i = FindPositionOfNamespace(adjustedLines); i < adjustedLines.Count; i++)
@@ -192,7 +192,7 @@ namespace CodeAnalyzer
         }
 
         //function to delete whitespace from a line as long as the line's length is greater than zero
-        private List<string> TrimLines(List<string> lines)
+        private void TrimLines(List<string> lines)
         {
             for (int i = 0; i < lines.Count; i++)
             {
@@ -208,11 +208,11 @@ namespace CodeAnalyzer
                     lines[i] = lines[i].Trim();
                 }
             }
-            return lines;
+            //return lines;
         }
 
         //move an opening bracket to the line it is associated with
-        private List<string> AdjustScopes(List<string> lines)
+        private void AdjustScopes(List<string> lines)
         {
             for (int i = 0; i < lines.Count; i++)
             {
@@ -222,7 +222,7 @@ namespace CodeAnalyzer
                     lines.RemoveAt(i);
                 }
             }
-            return lines;
+            //return lines;
         }
 
         //find index in list where namespace is declared
