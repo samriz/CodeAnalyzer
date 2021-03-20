@@ -36,17 +36,19 @@ namespace CodeAnalyzer
     public class AnalysisDisplayer
     {
         private readonly string XML_Name;
-        List<FunctionNode> functionNodes;
-        FileExtractor FE;
-        FunctionTracker FT;
-        TypeRelationshipFinder TRF;
+        private List<FunctionNode> functionNodes;
+        /*private FileExtractor FE;
+        private FunctionTracker FT;
+        private TypeRelationshipFinder TRF;*/
+        private IEnumerable<string> typeRelationships;
+        private readonly string className;
         
         //default constructor
         public AnalysisDisplayer()
         {
         }
         //parameterized constructor that specifies the name of the xml file
-        public AnalysisDisplayer(string fileName)
+        private AnalysisDisplayer(string fileName)
         {
             this.XML_Name = fileName + "_analysis.xml";
         }
@@ -54,18 +56,29 @@ namespace CodeAnalyzer
         {
             this.functionNodes = functionNodes;
         }
+        private AnalysisDisplayer(FileExtractor FE, FunctionTracker FT) : this(FE.GetFile())
+        {
+            functionNodes = FT.GetFunctionNodes();
+        }
         public AnalysisDisplayer(FileExtractor FE, FunctionTracker FT, TypeRelationshipFinder TRF) : this(FE.GetFile())
         {
-            this.FE = FE;
+            /*this.FE = FE;
             this.FT = FT;
-            this.TRF = TRF;
+            this.TRF = TRF;*/
+            className = FT.GetClassName();
+            typeRelationships = TRF.GetRelationships();
             functionNodes = FT.GetFunctionNodes();
-        }     
+        }
+        public AnalysisDisplayer(string className, IEnumerable<string> typeRelationships, List<FunctionNode> functionNodes)
+        {
+            this.className = className;
+            this.typeRelationships = typeRelationships;
+            this.functionNodes = functionNodes;
+        }
         public string GetXMLName()
         {
             return XML_Name;
         }
-
         //iterate through each element in functionNodes and print its contents to the console
         public void DisplayAnalysisToStandardOutput()
         {
@@ -105,8 +118,10 @@ namespace CodeAnalyzer
         class and print its contents to the console*/
         public void DisplayRelationshipsToConsole()
         {
-            Console.WriteLine("Type relationships for {0}:", FT.GetClassName());
-            foreach (var relationship in TRF.GetRelationships())
+            //Console.WriteLine("Type relationships for {0}:", FT.GetClassName());
+            Console.WriteLine("Type relationships for {0}:", className);
+            //foreach (var relationship in TRF.GetRelationships())
+            foreach (var relationship in typeRelationships)
             {
                 Console.WriteLine(" {0}", relationship);
             }
@@ -116,7 +131,8 @@ namespace CodeAnalyzer
         //overloaded method that takes in an IEnumerable collection
         public void DisplayRelationshipsToConsole(IEnumerable<string> relationships)
         {
-            Console.WriteLine("Type relationships for {0}:", FT.GetClassName());
+            //Console.WriteLine("Type relationships for {0}:", FT.GetClassName());
+            Console.WriteLine("Type relationships for {0}:", className);
             foreach (var relationship in relationships)
             {
                 Console.WriteLine(" {0}", relationship);
@@ -132,7 +148,8 @@ namespace CodeAnalyzer
             XmlNode rootNode = rootElement;
 
             XmlElement classNameElement = analysisXML.CreateElement("ClassName");
-            classNameElement.InnerText = FT.GetClassName();
+            //classNameElement.InnerText = FT.GetClassName();
+            classNameElement.InnerText = className;
             XmlNode classNameNode = classNameElement;
 
             XmlElement typeRelationshipsElement = analysisXML.CreateElement("TypeRelationships");
@@ -140,7 +157,8 @@ namespace CodeAnalyzer
 
             rootNode.AppendChild(classNameNode);
 
-            foreach (var relationship in TRF.GetRelationships())
+            //foreach (var relationship in TRF.GetRelationships())
+            foreach (var relationship in typeRelationships)
             {
                 XmlElement relationshipElement = analysisXML.CreateElement("Relationship");
                 relationshipElement.InnerText = relationship;
@@ -226,7 +244,6 @@ namespace CodeAnalyzer
             analysisXML.AppendChild(rootNode);
             return analysisXML;
         }
-
         // ---------------- test stub --------------------
 #if (test_analysisdisplayer)
         static void Main(string[] args)

@@ -43,7 +43,6 @@ namespace CodeAnalyzer
         //default constructor
         public TypeRelationshipFinder()
         {
-
         }
 
         //parameterized constructor
@@ -86,8 +85,7 @@ namespace CodeAnalyzer
         public IEnumerable<string> GetRelationships() 
         { 
             return FindRelationships().Distinct(); 
-        }
-        
+        }     
 // ---------------- test stub --------------------
 #if (test_typerelationshipfinder)
         static void Main(string[] args)

@@ -34,7 +34,7 @@ namespace CodeAnalyzer
     public class FileExtractor
     {
         private List<string> AllExtractedLines;
-        string file;
+        private string file;
 
         //default constructor
         public FileExtractor()

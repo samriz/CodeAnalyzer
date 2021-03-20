@@ -50,7 +50,7 @@ namespace CodeAnalyzer
         private string className;
         private string namespaceName;
 
-        private List<string> ExtractedLines;
+        private readonly List<string> ExtractedLines;
         private List<FunctionNode> functionNodes;
 
         //regular expression patterns:
@@ -201,7 +201,6 @@ namespace CodeAnalyzer
                 {
                     continue;
                 }
-
                 //trim off blank spaces
                 else
                 {

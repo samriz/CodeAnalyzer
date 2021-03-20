@@ -36,17 +36,19 @@ namespace CodeAnalyzer
         private string DirectoryPath; //the directory we want to search
         private string FilenameExtension; //.cs, .cpp, .h, .py, etc.
         private List<string> FilesWithFullPath; //files with full path
-        private List<string> FileNames = new List<string>(); //just file names
+        private List<string> FileNames; //just file names
 
         public DirectorySearcher(string DirectoryPath, string FilenameExtension = ".cs") //filename extension defaulted to .cs
         {
             this.DirectoryPath = DirectoryPath;
             this.FilenameExtension = FilenameExtension;
+            //FileNames = new List<string>();
         }
         public DirectorySearcher(string DirectoryPath, List<string> FilesWithFullPath)
         {
             this.DirectoryPath = DirectoryPath;
             this.FilesWithFullPath = FilesWithFullPath;
+            //FileNames = new List<string>();
         }
         public void SetDirectoryPath(string DirectoryPath) 
         { 

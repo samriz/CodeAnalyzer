@@ -33,7 +33,7 @@
   <Function>
     <FunctionName>public void DisplayRelationshipsToXML()</FunctionName>
     <NumberOfScopes>1</NumberOfScopes>
-    <NumberOfLines>24</NumberOfLines>
+    <NumberOfLines>26</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>private void CreateXMLDocument()</FunctionName>
