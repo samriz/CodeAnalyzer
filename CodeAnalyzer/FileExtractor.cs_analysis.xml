@@ -8,15 +8,20 @@
   <Function>
     <FunctionName>public void SetExtractedLines(string file)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>2</NumberOfLines>
+    <NumberOfLines>1</NumberOfLines>
   </Function>
   <Function>
-    <FunctionName>public void SetExtractedLines(List&lt;string&gt; filesLines)</FunctionName>
+    <FunctionName>public void SetExtractedLines(List&lt;string&gt; fileLines)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
-    <NumberOfLines>2</NumberOfLines>
+    <NumberOfLines>1</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>public void SetFile(string file)</FunctionName>
+    <NumberOfScopes>0</NumberOfScopes>
+    <NumberOfLines>1</NumberOfLines>
+  </Function>
+  <Function>
+    <FunctionName>public void ExtractFileLines(string file)</FunctionName>
     <NumberOfScopes>0</NumberOfScopes>
     <NumberOfLines>1</NumberOfLines>
   </Function>

@@ -44,7 +44,6 @@ namespace CodeAnalyzer
         public TypeRelationshipFinder()
         {
         }
-
         //parameterized constructor
         public TypeRelationshipFinder(string className, List<string> classNames, List<string> fileLines)
         {
@@ -52,7 +51,6 @@ namespace CodeAnalyzer
             this.classNames = classNames;
             this.fileLines = fileLines;
         }
-
         //parameterized constructor.
         //this one accepts an IEnumerable collection so that the Distinct function can be called to eliminate unnecessary duplicates
         public TypeRelationshipFinder(string className, IEnumerable<string> classNames, List<string> fileLines)
@@ -60,8 +58,7 @@ namespace CodeAnalyzer
             this.className = className;
             this.classNames = classNames.ToList();
             this.fileLines = fileLines;
-        }
-        
+        }        
         //compare each line of the file with a list of all user-defined class names in a particular directory
         //returns a list of strings that contain the class name and which types it uses
         private IEnumerable<string> FindRelationships()
@@ -80,7 +77,6 @@ namespace CodeAnalyzer
             }
             return relationships;
         }
-
         //return all of the relationships a certain class has
         public IEnumerable<string> GetRelationships() 
         { 

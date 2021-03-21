@@ -63,7 +63,6 @@ namespace CodeAnalyzer
         public List<string> GetAllClassNames(List<FunctionNode> functionNodes)
         {
             List<string> classNames = new List<string>();
-
             foreach(var node in functionNodes)
             {
                 classNames.Add(node.GetClassName());
@@ -79,7 +78,6 @@ namespace CodeAnalyzer
             }
             return distinctClassNamesList;
         }
-
 // ---------------- test stub --------------------
 #if (test_classnamefinder)
         static void Main(string[] args)

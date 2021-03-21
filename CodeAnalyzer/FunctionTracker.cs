@@ -75,7 +75,6 @@ namespace CodeAnalyzer
             doWhilePattern = @"(do)\s*\{";
             endBracePattern = @"\}";    
         }
-
         //default constructor
         public FunctionTracker()
         {
@@ -85,14 +84,12 @@ namespace CodeAnalyzer
             className = "";
             namespaceName = "";   
         }
-
         //parameterized constructor
         public FunctionTracker(List<string> ExtractedLines) : this()
         {
             this.ExtractedLines = ExtractedLines;
             DetectFunctionsAndScopes();
         }
-
         //find namespace, class, functions, and scopes based on certain patterns using Regex and Match classes
         private void DetectFunctionsAndScopes()
         {
@@ -143,7 +140,6 @@ namespace CodeAnalyzer
                 }
             }
         }
-
         //gather information about function
         private void CollectFunctionData(List<string> functionLines, ref int functionPosition, ref FunctionNode FN, int scopeCount, int numberOfLines)
         {
@@ -190,7 +186,6 @@ namespace CodeAnalyzer
                 }
             }
         }
-
         //function to delete whitespace from a line as long as the line's length is greater than zero
         private void TrimLines(List<string> lines)
         {
@@ -207,9 +202,7 @@ namespace CodeAnalyzer
                     lines[i] = lines[i].Trim();
                 }
             }
-            //return lines;
         }
-
         //move an opening bracket to the line it is associated with
         private void AdjustScopes(List<string> lines)
         {
@@ -221,9 +214,7 @@ namespace CodeAnalyzer
                     lines.RemoveAt(i);
                 }
             }
-            //return lines;
         }
-
         //find index in list where namespace is declared
         private int FindPositionOfNamespace(List<string> list)
         {
@@ -262,7 +253,6 @@ namespace CodeAnalyzer
         { 
             return functionNodes; 
         }
-
         // ---------------- test stub --------------------
 #if (test_functiontracker)
         static void Main(string[] args)

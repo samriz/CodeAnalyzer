@@ -56,6 +56,7 @@ namespace CodeAnalyzer
         {
             this.functionName = functionName;
             this.className = "";
+            this.namespaceName = "";
             this.numberOfScopes = 0;
             this.numberOfLines = 0;
         }

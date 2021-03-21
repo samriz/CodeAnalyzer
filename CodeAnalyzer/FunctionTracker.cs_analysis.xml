@@ -13,12 +13,12 @@
   <Function>
     <FunctionName>private void TrimLines(List&lt;string&gt; lines)</FunctionName>
     <NumberOfScopes>3</NumberOfScopes>
-    <NumberOfLines>15</NumberOfLines>
+    <NumberOfLines>13</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>private void AdjustScopes(List&lt;string&gt; lines)</FunctionName>
     <NumberOfScopes>2</NumberOfScopes>
-    <NumberOfLines>9</NumberOfLines>
+    <NumberOfLines>8</NumberOfLines>
   </Function>
   <Function>
     <FunctionName>private int FindPositionOfNamespace(List&lt;string&gt; list)</FunctionName>

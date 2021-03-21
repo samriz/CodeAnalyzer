@@ -90,7 +90,6 @@ namespace CodeAnalyzer
                 Console.WriteLine("Number of lines: {0}\n", node.GetNumberOfLines());
             }
         }
-
         //call CreateXMLDocument as long as functionNodes isn't empty
         public void DisplayAnalysisToXML()
         { 
@@ -127,7 +126,6 @@ namespace CodeAnalyzer
             }
             Console.WriteLine("");
         }
-
         //overloaded method that takes in an IEnumerable collection
         public void DisplayRelationshipsToConsole(IEnumerable<string> relationships)
         {
@@ -139,7 +137,6 @@ namespace CodeAnalyzer
             }
             Console.WriteLine("");
         }
-
         //create xml document and write type relationships in it
         public void DisplayRelationshipsToXML()
         {
@@ -170,7 +167,6 @@ namespace CodeAnalyzer
             analysisXML.AppendChild(rootNode);
             analysisXML.Save(XML_Name);
         }
-
         //create xml document and write contents of functionNodes to it
         private void CreateXMLDocument()
         {
