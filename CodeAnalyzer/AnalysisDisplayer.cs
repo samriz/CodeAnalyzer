@@ -80,6 +80,18 @@ namespace CodeAnalyzer
             return XML_Name;
         }
         //iterate through each element in functionNodes and print its contents to the console
+        public List<string> GetAnalysis()
+        {
+            List<string> analysis = new List<string>();
+            foreach (var node in functionNodes)
+            {
+                analysis.Add("Class: " +  node.GetClassName());
+                analysis.Add("Function name: " + node.GetFunctionName());
+                analysis.Add("Function complexity: " + node.GetNumberOfScopes());
+                analysis.Add("Number of lines: " + node.GetNumberOfLines() + "\n");
+            }
+            return analysis;
+        }
         public void DisplayAnalysisToStandardOutput()
         {
             foreach (var node in functionNodes)
