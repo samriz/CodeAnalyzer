@@ -42,7 +42,9 @@ namespace CodeAnalyzer
         private TypeRelationshipFinder TRF;*/
         private IEnumerable<string> typeRelationships;
         private readonly string className;
-        
+
+        public List<FunctionNode> GetFunctionNodes() => functionNodes;
+
         //default constructor
         public AnalysisDisplayer()
         {
@@ -112,6 +114,17 @@ namespace CodeAnalyzer
             else
             {
                 CreateXMLDocument();     
+            }
+        }
+        public void DisplayAnalysisToXML(string path)
+        {
+            if (functionNodes.Count < 1)
+            {
+                return;
+            }
+            else
+            {
+                CreateXMLDocument(path);
             }
         }
         public XmlDocument GetAnalysisInXML()
@@ -215,6 +228,42 @@ namespace CodeAnalyzer
             }
             analysisXML.AppendChild(rootNode);
             analysisXML.Save(XML_Name);
+        }
+        private void CreateXMLDocument(string path)
+        {
+            XmlDocument analysisXML = new XmlDocument();
+            XmlElement rootElement = analysisXML.CreateElement("Class");
+            XmlNode rootNode = rootElement;
+
+            XmlElement classNameElement = analysisXML.CreateElement("ClassName");
+            classNameElement.InnerText = functionNodes[0].GetClassName();
+            XmlNode classNameNode = classNameElement;
+            rootNode.AppendChild(classNameNode);
+
+            foreach (var node in functionNodes)
+            {
+                XmlElement functionElement = analysisXML.CreateElement("Function");
+                XmlNode functionNode = functionElement;
+
+                XmlElement functionNameElement = analysisXML.CreateElement("FunctionName");
+                functionNameElement.InnerText = node.GetFunctionName();
+                XmlNode functionNameNode = functionNameElement;
+
+                XmlElement scopeElement = analysisXML.CreateElement("NumberOfScopes");
+                scopeElement.InnerText = node.GetNumberOfScopes().ToString();
+                XmlNode scopeNode = scopeElement;
+
+                XmlElement linesElement = analysisXML.CreateElement("NumberOfLines");
+                linesElement.InnerText = node.GetNumberOfLines().ToString();
+                XmlNode linesNode = linesElement;
+
+                functionNode.AppendChild(functionNameNode);
+                functionNode.AppendChild(scopeNode);
+                functionNode.AppendChild(linesNode);
+                rootNode.AppendChild(functionNode);
+            }
+            analysisXML.AppendChild(rootNode);
+            analysisXML.Save(path);
         }
         private XmlDocument ReturnXMLDocument()
         {
